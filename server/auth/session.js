@@ -12,17 +12,16 @@ const UserSession = require('../models/usersession');
 router.get("/verify", (req, res, next) => {
     const { query } = req;
     const { token } = query;
-
     UserSession.find(
         {
             _id: token,
-            isDeleted: false,
+            isValid: true,
         },
         (err, sessions) => {
             if (err) {
                 return res.send({
                     success: false,
-                    message: "Error: Invalid Token",
+                    message: "Error: Invalid Token!",
                 });
             }
 
@@ -30,13 +29,13 @@ router.get("/verify", (req, res, next) => {
             if (sessions.length != 1) {
                 return res.send({
                     success: false,
-                    message: "Error: User already logged in.",
+                    message: "Error: Session not found!",
                 });
             } else {
                 return res.send({
                     success: true,
                     userId: session.userId,
-                    message: "good",
+                    message: "Success: Succesful verification!",
                 });
             }
         }

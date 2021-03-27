@@ -11,12 +11,16 @@ require("dotenv/config")
 // MODULES
 //////////////////////
 // Auth
-const logout = require('./auth/logout');
+const signout = require('./auth/signout');
 const signin = require('./auth/signin');
 const signup = require('./auth/signup');
 const session = require('./auth/session');
-// Event
-const update = require('./userevents/update');
+// App Event
+const profiledata = require('./appevents/profiledata');
+const linkdata = require('./appevents/linkdata');
+// UserEvent
+const formupdate = require('./userevents/formupdate');
+const linkupdate = require('./userevents/linkupdate')
 
 
 //////////////////////
@@ -35,9 +39,13 @@ app.use(cors());
 app.use("/api", signin);
 app.use("/api", signup);
 app.use("/api", session);
-app.use("/api", logout);
-// Events
-app.use("/api", update);
+app.use("/api", signout);
+// App Events
+app.use("/api", profiledata);
+app.use("/api", linkdata);
+// User Events
+app.use("/api", formupdate);
+app.use("/api", linkupdate);
 
 
 //////////////////////

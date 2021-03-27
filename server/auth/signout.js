@@ -9,7 +9,7 @@ const UserSession = require('../models/usersession');
 //////////////////////
 // LOGOUT
 //////////////////////
-router.post("/logout", (req, res, next) => {
+router.post("/signout", (req, res, next) => {
     const { body } = req;
     const { token } = body;
 
