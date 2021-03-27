@@ -5,15 +5,20 @@ const userSessionSchema = new Schema({
     userId: {
         type: String,
         default: "",
+        required: true
     },
-    timestamp: {
+    created: {
         type: Date,
         default: Date.now(),
     },
-    isDeleted: {
-        type: Boolean,
-        default: false,
+    terminated: {
+        type: Date,
+        default: "",
     },
+    isValid: {
+        type: Boolean,
+        default: true
+    }
 })
 
 module.exports = mongoose.model('UserSession', userSessionSchema);

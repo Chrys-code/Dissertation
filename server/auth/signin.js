@@ -12,19 +12,12 @@ const UserSession = require('../models/usersession');
 //////////////////////
 router.post("/signin", (req, res, next) => {
     const { body } = req;
-    const { name, password, schoolId } = body;
+    const { email, password } = body;
 
-    if (!schoolId) {
+    if (!email) {
         return res.send({
             success: false,
-            message: "Error: Organization cannot be blank.",
-        });
-    }
-
-    if (!name) {
-        return res.send({
-            success: false,
-            message: "Error: Name cannot be blank.",
+            message: "Error: Email cannot be blank.",
         });
     }
 
@@ -37,20 +30,19 @@ router.post("/signin", (req, res, next) => {
 
     User.find(
         {
-            name: name,
-            schoolId: schoolId,
+            email: email,
         },
         (err, users) => {
             if (err) {
                 return res.send({
                     success: false,
-                    message: "Error: Internal server error",
+                    message: `Error: Internal server error, ${err}`,
                 });
             }
             if (users.length != 1) {
                 return res.send({
                     sucess: false,
-                    message: "Error: Invalid username",
+                    message: `Error: Internal server error, ${err}`,
                 });
             }
 
@@ -62,22 +54,20 @@ router.post("/signin", (req, res, next) => {
                 });
             }
 
-            const newUserSession = new UserSession();
-            newUserSession.userId = user._id;
-            newUserSession.save((err, doc) => {
+            const newSession = new UserSession();
+            newSession.userId = user._id;
+            newSession.save((err, doc) => {
                 if (err) {
                     return res.send({
                         sucess: false,
-                        message: "Error: Internal server error when trying to create User session.",
+                        message: `Error: Failed to create session, ${err}`,
                     });
                 }
-
                 return res.send({
                     success: true,
-                    message: "Valid sign in",
+                    message: "Signed In",
                     token: doc._id,
                     id: user._id,
-                    schoolId: user.schoolId
                 });
             });
         }

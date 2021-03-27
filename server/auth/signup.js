@@ -14,18 +14,25 @@ router.post("/signup", (req, res, next) => {
     const { body } = req;
     console.log("body", body);
 
-    const { name, password, schoolId } = body;
+    const { firstname, lastname, email, password } = body;
 
-    if (!schoolId) {
+    if (!firstname) {
         return res.send({
             success: false,
-            message: "Error: SchoolId cannot be blank.",
+            message: "Error: Firstname cannot be blank",
         });
     }
-    if (!name) {
+    if (!lastname) {
         return res.send({
             success: false,
-            message: "Error: Name cannot be blank.",
+            message: "Error: Lastname cannot be blank.",
+        });
+    }
+
+    if (!email) {
+        return res.send({
+            success: false,
+            message: "Error: Email cennot be blank.",
         });
     }
 
@@ -38,36 +45,37 @@ router.post("/signup", (req, res, next) => {
 
     User.find(
         {
-            name: name
+            email: email
         },
         (err, previousUsers) => {
             if (err) {
                 return res.send({
                     success: false,
-                    message: "Error: Can't find user",
+                    message: `Error: Internal server error, please try again later, ${err}`,
                 });
             } else if (previousUsers.length > 0) {
                 return res.send({
                     success: false,
-                    message: "Error: Username are already in use",
+                    message: "Error: Email is are already in use",
                 });
             }
 
             //Save new user
             const newUser = new User();
-            newUser.name = name;
-            newUser.schoolId = schoolId;
+            newUser.firstname = firstname;
+            newUser.lastname = lastname;
+            newUser.email = email;
             newUser.password = newUser.generateHash(password);
             newUser.save((err, user) => {
                 if (err) {
                     return res.send({
                         success: false,
-                        message: "Error: Error saving user",
+                        message: `Error: Failed to create account, please try again later, ${err}`,
                     });
                 }
                 return res.send({
                     success: true,
-                    message: "Signed up",
+                    message: "Success: Account created successfully",
                 });
             });
         }

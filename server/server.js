@@ -5,7 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-require("dotenv/config");
+require("dotenv/config")
 
 //////////////////////
 // MODULES
@@ -43,7 +43,7 @@ app.use("/api", update);
 //////////////////////
 // CONNECT TO DATABASE
 //////////////////////
-mongoose.connect(process.env.DB_KEY, {
+mongoose.connect(process.env.DB_KEY || "mongodb+srv://Lancer:R94619422n@cluster0.jzzub.mongodb.net/Dissproject?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -54,11 +54,12 @@ mongoose.connection.on('open', () => {
     console.log('Connected to Database')
 });
 
+/*
 // heroku
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("../client/build"));
 }
-
+*/
 
 //////////////////////
 // RUN PORT 8080

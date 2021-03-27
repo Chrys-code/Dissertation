@@ -3,40 +3,40 @@
 //////////////////////
 const express = require("express");
 const router = express.Router();
-const User = require("../models/userschema");
 const UserSession = require('../models/usersession');
 
 
 //////////////////////
 // LOGOUT
 //////////////////////
-router.get("/logout", (req, res, next) => {
-    const { query } = req;
-    const { token } = query;
+router.post("/logout", (req, res, next) => {
+    const { body } = req;
+    const { token } = body;
 
     UserSession.findOneAndUpdate(
         {
             _id: token,
-            isDeleted: false,
+            isValid: true,
         },
         {
             $set: {
-                isDeleted: true,
+                terminated: Date.now(),
+                isValid: false
             },
         },
         null,
-        (err, sessions) => {
+        (err) => {
             if (err) {
-                console.log(err);
                 return res.send({
                     success: false,
-                    message: "Error: User session could not be terminated",
+                    message: `Error: Failed to terminate session, ${err}`,
                 });
             }
 
             return res.send({
                 success: true,
-                message: "User session successfully terminated",
+                token: token,
+                message: "Success: Session successfully terminated",
             });
         }
     );

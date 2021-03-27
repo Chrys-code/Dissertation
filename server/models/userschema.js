@@ -26,32 +26,32 @@ const userSchema = new Schema({
     children: {
         type: Boolean,
         default: false,
-        required: true
+        required: false
     },
     departure: {
         type: { location: String, time: Date },
         default: { location: "", time: "" },
-        required: { location: true, time: true }
+        required: { location: false, time: false }
     },
     arrival: {
         type: { location: String, time: Date },
         default: { location: "", time: "" },
-        required: { location: true, time: true }
+        required: { location: false, time: false }
     },
     transport: {
         type: Array,
         default: [],
-        required: true
+        required: false
     },
     links: {
         type: Array,
         default: [],
-        required: true
+        required: false
     },
     updated: {
         type: Date,
         default: "",
-        required: true
+        required: false
     }
 })
 
