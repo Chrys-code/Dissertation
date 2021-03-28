@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { covidData } from "../lib/coviddata"
-
+import style from "../styles/indextyle.module.scss"
 
 const Home = ({ covidProps }) => {
   const [data, setData] = useState([])
@@ -13,9 +12,7 @@ const Home = ({ covidProps }) => {
   }, [])
 
   return (
-    <div>
-      <h1>Im ur app</h1>
-    </div>
+    <h1>Im ur app</h1>
   )
 }
 

@@ -1,0 +1,32 @@
+/////////////////
+// DROPDOWN
+/////////////////
+
+@mixin dropdown($width, $color, $background, $shadowColor) {
+    .dropdown {
+        position: relative;
+        color: $color;
+        width: $width;
+        height: 42px;
+        border: none;
+        outline: none;
+        padding: 0px 0px 0px 10px;
+        margin: 10px;
+        background: #f3f3f4;
+        border-radius: 15px;
+        box-shadow: 4px 4px 6px #abc2d481;
+        appearance: none;
+        background-image: url("/public/Icondropdown.png");
+        background-repeat: no-repeat;
+        background-position-x: 90%;
+        background-position-y: 45%;
+    }
+  }
+
+/* JSX SAMPLE:
+
+<select className={style.dropdown}>
+    <option value="Hi">Hi</option>
+</select>
+
+*/

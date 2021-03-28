@@ -1,0 +1,47 @@
+/////////////////
+// BUTTON
+/////////////////
+
+@mixin button($color, $shadowColorDark, $shadowColorLight) {
+    .submit_btn {
+        position: relative;
+        width: 80%;
+        height: 56px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 4px 2px 10px $shadowColorDark;
+        outline: none;
+        font-size: 18px;
+        color: $color;
+        font-weight: bold;
+        margin-top: 24px;
+      
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 10px;
+          box-shadow: -2px -2px 4px $shadowColorLight;
+        }
+
+        &:focus {
+            box-shadow: 2px 2px 2px #6ba46a7a;
+            font-size: 17px;
+          }
+          
+        &:focus:after {
+            content: "";
+            box-shadow: -2px -2px 2px white;
+          }  
+    }
+}
+  
+
+/* JSX SAMPLE:
+
+<button className={style.submit_btn}>Login</button>
+
+*/

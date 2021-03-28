@@ -1,0 +1,16 @@
+@import "./lib/components/inputfield.scss";
+@import "./lib/components/button.scss";
+@import "./lib/components/dropdown.scss";
+
+.container {
+    width: 100%;
+    padding: 0px 15px 0px 15px;
+    height: 100vh;
+    background: #ffffffff;
+
+    @include input_field(#ffffff, #e6e6e6e6, #e6e6e6e6);
+    @include button(#ffffff, #e6e6e6e6, #e6e6e6e6);
+    @include dropdown(150px, #e2e2e2e2, #e6e6e6e6, #ffffff)
+}
+
+

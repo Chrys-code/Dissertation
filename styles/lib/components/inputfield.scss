@@ -1,0 +1,58 @@
+/////////////////
+// INPUT FIELD
+/////////////////
+
+@mixin input_field($color, $shadowColorDark, $shadowColorLight) {
+    .input_field {
+        position: relative;
+        width: 100%;
+        margin: 24px 0px 24px 0px;
+
+        .input_line {
+            position: relative;
+            outline: none;
+            border: none;
+            height: 40px;
+            padding-left: 60px;
+            width: 200px;
+            border-radius: 20px;
+            background: $color;
+            box-shadow: inset 4px 2px 8px $shadowColorDark;
+        
+            &:after {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              border-radius: 10px;
+              box-shadow: -4px -2px 8px $shadowColorLight;
+            }
+        
+        }
+
+        .icon {
+            position: absolute;
+            top: 3px;
+            left: 16px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+          }
+    }
+}
+
+/* JSX SAMPLE:
+
+<div className={style.input_field}>
+    <input className={style.input_line} placeholder="password" />
+    <div className={style.icon}>
+        <img alt="" />
+    </div>
+</div>
+
+*/
