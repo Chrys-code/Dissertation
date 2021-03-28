@@ -12,7 +12,33 @@ const Home = ({ covidProps }) => {
   }, [])
 
   return (
-    <h1>Im ur app</h1>
+    <div className={style.container}>
+      <h1>Im ur app</h1>
+      <form>
+        <div className={style.input_field}>
+          <input className={style.input_line} placeholder="password" />
+          <div className={style.icon}>
+            <img alt="" />
+          </div>
+        </div>
+        <select className={style.dropdown}>
+          <option value="Hi">Hi</option>
+        </select>
+        <button className={style.submit_btn}>Login</button>
+        <nav >
+          <button className={style.submit_btn}>+</button>
+        </nav>
+        <a href="#">
+          <div className={style.link}>
+            <h3>Link goes here</h3>
+            <p>Description goes here</p>
+            <div className={style.icon}>
+              <img alt="" />
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
   )
 }
 

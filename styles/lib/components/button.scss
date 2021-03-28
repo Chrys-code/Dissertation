@@ -2,19 +2,20 @@
 // BUTTON
 /////////////////
 
-@mixin button($color, $shadowColorDark, $shadowColorLight) {
+@mixin button($width, $color, $shadowColorDark, $shadowColorLight) {
     .submit_btn {
         position: relative;
-        width: 80%;
+        width: $width;
         height: 56px;
         border: none;
-        border-radius: 10px;
+        border-radius: 8px;
         box-shadow: 4px 2px 10px $shadowColorDark;
         outline: none;
         font-size: 18px;
         color: $color;
         font-weight: bold;
         margin-top: 24px;
+        background-color: white;
       
         &:after {
           content: "";
