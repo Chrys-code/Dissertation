@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { covidData } from "../lib/coviddata"
 import style from "../styles/indextyle.module.scss"
@@ -46,6 +46,7 @@ const Home = ({ covidProps }) => {
 
 
 export default Home
+
 /*
 export const getServerSideProps: GetServerSideProps = async context => {
   const data = await covidData()
