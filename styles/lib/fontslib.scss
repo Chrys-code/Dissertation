@@ -1,78 +1,99 @@
-////////////////////////////////////////////
-// mobile
-// Font-size
-////////////////////////////////////////////
-$mobile_Header: 32px;
-$mobile_SubHeader: 22px;
-$mobile_P_Primary: 16px;
-$mobile_P_Secondary: 14px;
+//////////////////////////
+// DESKTOP_FONT_SIZE
+//////////////////////////
+$tablet_Header: 28px;
+$tablet_SubHeader: 22px;
+$tablet_Primary: 18px;
+$tablet_Secondary: 16px;
 
-////////////////////////////////////////////
-// Colors and font-weight
-////////////////////////////////////////////
+//////////////////////////
+// MOBILE_FONT_SIZE
+//////////////////////////
+$mobile_Header: 22px;
+$mobile_SubHeader: 18px;
+$mobile_Primary: 16px;
+$mobile_Secondary: 14px;
+
+//////////////////////////
+// FONT_WEIGHT & COLOR
+//////////////////////////
 
 // Font-weight
 $regular: 400;
 $semiBold: 500;
 $bold: 700;
 
-// Header color
-$Header_General: #5f5f5f;
-$Header_Green: #6ba46a;
-$Header_Blue: #40c3fd;
-$Header_Orange: #ffa500;
-// Text color
-$pGeneralColor: #5f5f5f;
-$pTextGreen: #6ba46a;
-$pTextBlue: #40c3fd;
-$pTextOrange: #ffa500;
-$pWhite: white;
+// Colors
+$General: #5f5f5f;
+$Green: #6ba46a;
+$Blue: #40c3fd;
+$Orange: #ffa500;
+$White: white;
 // Sucess
 $ColorSucess: #43ecac;
 // Error
 $ColorError: #ff6e79;
 
-////////////////////////////////////////////
-// Font sets // mobile
-////////////////////////////////////////////
 
-//Intro
-@mixin mobile_header($color) {
-  font-size: $mobile_Header;
+//////////////////////////
+// DESKTOP_FONT_SETS 
+//////////////////////////
+
+// Header
+@mixin tablet_h1($color) {
+  font-size: $tablet_Header;
   font-weight: $bold;
   color: $color;
 }
-// Subtitle
-@mixin mobile_subheader($color) {
-  font-size: $mobile_SubHeader;
-  font-weight: $bold;
-  color: $color;
-}
-
-// Text Strong
-@mixin mobile_p_primary_strong($color) {
-  font-size: $mobile_P_Primary;
-  font-weight: $bold;
-  color: $color;
-}
-
-// Subtext Strong
-@mixin mobile_p_secondary_strong($color) {
-  font-size: $mobile_P_Secondary;
-  font-weight: $bold;
+// Sub-Header
+@mixin tablet_h2($color) {
+  font-size: $tablet_SubHeader;
+  font-weight: $semiBold;
   color: $color;
 }
 
 // Text
-@mixin mobile_p_primary($color) {
-  font-size: $mobile_P_Primary;
-  font-weight: $regular;
+@mixin tablet_primary($color, $weight) {
+  font-size: $tablet_Primary;
+  font-weight: $weight;
   color: $color;
 }
 
 // Subtext
-@mixin mobile_p_secondary($color) {
-  font-size: $mobile_P_Secondary;
-  font-weight: $regular;
+@mixin tablet_secondary($color, $weight) {
+  font-size: $tablet_Secondary;
+  font-weight: $weight;
+  color: $color;
+}
+
+
+//////////////////////////
+// MOBILE_FONT_SETS 
+//////////////////////////
+
+// Header
+@mixin mobile_h1($color) {
+  font-size: $mobile_Header;
+  font-weight: $bold;
+  color: $color;
+}
+// Sub-Header
+@mixin mobile_h2($color) {
+  font-size: $mobile_SubHeader;
+  font-weight: $semiBold;
+  color: $color;
+}
+
+// Text
+@mixin mobile_primary($color, $weight) {
+  font-size: $mobile_Primary;
+  font-weight: $weight;
+  color: $color;
+}
+
+// Subtext
+@mixin mobile_secondary($color, $weight) {
+  font-size: $mobile_Secondary;
+  font-weight: $weight;
   color: $color;
 }

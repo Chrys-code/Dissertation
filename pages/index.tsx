@@ -14,6 +14,8 @@ const Home = ({ covidProps }) => {
   return (
     <div className={style.container}>
       <h1>Im ur app</h1>
+      <h2>Im ur app</h2>
+      <p>Im ur app</p>
       <form>
         <div className={style.input_field}>
           <input className={style.input_line} placeholder="password" />
@@ -30,7 +32,7 @@ const Home = ({ covidProps }) => {
         </nav>
         <a href="#">
           <div className={style.link}>
-            <h3>Link goes here</h3>
+            <h2>Link goes here</h2>
             <p>Description goes here</p>
             <div className={style.icon}>
               <img alt="" />

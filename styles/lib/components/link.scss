@@ -2,7 +2,7 @@
 // LINK
 /////////////////
 
-@mixin link($color, $shadowColorDark, $shadowColorLight) {
+@mixin link($shadowColorDark, $shadowColorLight) {
     .link {
         position: relative;
         width: 100%;
@@ -11,8 +11,6 @@
         box-shadow: 4px 2px 10px $shadowColorDark;
         outline: none;
         font-size: 18px;
-        color: $color;
-        font-weight: bold;
         margin-top: 24px;
         padding-left: 100px;
       
