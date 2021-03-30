@@ -1,45 +1,24 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { covidData } from "../lib/coviddata"
-import style from "../styles/indextyle.module.scss"
 
-const Home = ({ covidProps }) => {
+interface Props {
+  covidProps: Array<String>;
+}
+
+const Home: FC<Props> = ({ covidProps }: Props) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    //setData(covidProps)
+    setData(covidProps)
+    console.log(covidProps)
   }, [])
 
   return (
-    <div className={style.container}>
+    <div >
       <h1>Im ur app</h1>
-      <h2>Im ur app</h2>
-      <p>Im ur app</p>
-      <form>
-        <div className={style.input_field}>
-          <input className={style.input_line} placeholder="password" />
-          <div className={style.icon}>
-            <img alt="" />
-          </div>
-        </div>
-        <select className={style.dropdown}>
-          <option value="Hi">Hi</option>
-        </select>
-        <button className={style.submit_btn}>Login</button>
-        <nav >
-          <button className={style.submit_btn}>+</button>
-        </nav>
-        <a href="#">
-          <div className={style.link}>
-            <h2>Link goes here</h2>
-            <p>Description goes here</p>
-            <div className={style.icon}>
-              <img alt="" />
-            </div>
-          </div>
-        </a>
-      </form>
+
     </div>
   )
 }
@@ -52,4 +31,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const data = await covidData()
   return { props: { covidProps: data } }
 }
+
+<div>
+{data.map((data, index) => { return (<p key={index}>{data.country}</p>) })}
+</div>
 */
+

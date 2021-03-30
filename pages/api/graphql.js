@@ -35,7 +35,7 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         user(_parent, _args, _context, _info) {
-            return User.findById({ _id: _args._id })
+            return User.findOne()
         },
     },
 }

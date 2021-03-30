@@ -10,26 +10,35 @@
 
         .input_line {
             position: relative;
-            outline: none;
-            border: none;
-            height: 40px;
+            display: flex;
+            align-items: center;
+            height: 42px;
             padding-left: 60px;
-            width: 200px;
+            width: 100%;
+            border-top: 1px solid $shadowColorDark;
+            border-left: 1px solid $shadowColorDark;
             border-radius: 20px;
-            background: $color;
-            box-shadow: inset 4px 2px 8px $shadowColorDark;
-        
-            &:after {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              border-radius: 10px;
-              box-shadow: -4px -2px 8px $shadowColorLight;
+            box-shadow: inset 2px 2px 4px $shadowColorDark;    
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-bottom: 1px solid $shadowColorLight;
+                border-right: 1px solid $shadowColorLight;
+                border-radius: 20px;
+                box-shadow: inset -2px -2px 4px $shadowColorLight;
+                pointer-events: none;
+              }
+
+            input {
+                outline: none;
+                border: none;
+                background: $color; 
             }
-        
         }
 
         .icon {
@@ -49,7 +58,9 @@
 /* JSX SAMPLE:
 
 <div className={style.input_field}>
-    <input className={style.input_line} placeholder="password" />
+    <div className={style.input_line}>
+        <input className={style.input_line} placeholder="password" />
+    </div>
     <div className={style.icon}>
         <img alt="" />
     </div>

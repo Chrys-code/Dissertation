@@ -1,0 +1,31 @@
+@import "./lib/components/inputfield.scss";
+@import "./lib/components/button.scss";
+@import "./lib/palette.scss";
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0px 15px 0px 15px;
+    height: 100vh;
+
+    // Logo
+    @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowlight);
+
+    form {
+        width: 75%;
+        // Both input fields
+        @include input_field($background, $shadowDark, $shadowlight);
+        // Sign In button
+        @include button(48px, 100%, $background, $Green,  $shadowDark, $shadowlight);
+    }
+
+    .signup {
+        color: $ColorError
+    }
+}
+
+

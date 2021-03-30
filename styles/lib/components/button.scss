@@ -2,20 +2,22 @@
 // BUTTON
 /////////////////
 
-@mixin button($width, $color, $shadowColorDark, $shadowColorLight) {
-    .submit_btn {
+@mixin button($height, $width, $color, $textColor, $shadowColorDark, $shadowColorLight) {
+    .btn {
         position: relative;
         width: $width;
-        height: 56px;
+        height: $height;
         border: none;
         border-radius: 8px;
         box-shadow: 4px 2px 10px $shadowColorDark;
-        outline: none;
         font-size: 18px;
-        color: $color;
         font-weight: bold;
+        color: $textColor;
+        background-color: $color;
         margin-top: 24px;
-        background-color: white;
+        text-align: center;
+        outline: none;
+
       
         &:after {
           content: "";
@@ -43,6 +45,6 @@
 
 /* JSX SAMPLE:
 
-<button className={style.submit_btn}>Login</button>
+<button className={style.btn}>Login</button>
 
 */

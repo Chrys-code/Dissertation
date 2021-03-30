@@ -1,12 +1,14 @@
 @import "/styles/lib/fontslib.scss";
 @import "/styles/lib/media.scss";
+@import "./palette.scss";
 
 body {
+  background: $background;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+} 
 
 a {
   color: inherit;
@@ -18,27 +20,21 @@ a {
 }
 
 h1 {
-  @include md {
-    @include tablet_h1($General)
-  }
+    @include tablet_h1($General);
   @include sm {
     @include mobile_h1($General);
   }
 }
 
 h2 {
-  @include md {
-    @include tablet_h2($General)
-  }
+    @include tablet_h2($General);
   @include sm {
    @include mobile_h2($General);
   }
 }
 
 p {
-  @include md {
-    @include tablet_primary($General, $regular)
-  }
+  @include tablet_primary($General, $regular);
   @include sm {
    @include mobile_primary($General, $regular);
   }
