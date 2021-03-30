@@ -1,0 +1,43 @@
+@import "./lib/components/inputfield.scss";
+@import "./lib/components/button.scss";
+@import "./lib//components//dropdown.scss";
+@import "./lib/palette.scss";
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0px 15px 0px 15px;
+    height: 100vh;
+    // Logo
+    @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowLight);
+    form {
+        width: 75%;
+        // Input fields
+        @include input_field($background, $shadowDark, $shadowLight){
+            margin-top: 50px;
+            margin-bottom: 10px;
+            label {
+                position: absolute;
+                top: -40px;    
+                left: 15px;
+            }
+        };
+        .inline_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            // Dropdowns
+            @include dropdown(42px, 90px, $General, $background, $shadowDark, $shadowDark);
+        }
+        // Save button
+        @include button(48px, 100%, $background, $Green,  $shadowDark, $shadowLight);
+    }
+}
+
+

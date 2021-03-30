@@ -13,14 +13,14 @@
     height: 100vh;
 
     // Logo
-    @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowlight);
+    @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowLight);
 
     form {
         width: 75%;
         // Both input fields
-        @include input_field($background, $shadowDark, $shadowlight);
+        @include input_field($background, $shadowDark, $shadowLight);
         // Sign In button
-        @include button(48px, 100%, $background, $Green,  $shadowDark, $shadowlight);
+        @include button(48px, 100%, $background, $Green,  $shadowDark, $shadowLight);
     }
 
     .signup {
