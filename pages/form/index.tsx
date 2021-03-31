@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
-import { GetServerSideProps } from 'next';
-import Link from "next/link";
-import Head from 'next/head';
-import style from "../../styles/form_style.module.scss";
+import React, { FC } from "react"
+import Head from 'next/head'
+import style from "../../styles/form_style.module.scss"
 import Nav from "../components/navbar"
+import Button from "../components/button"
+import Dropdown from "../components/dropdown"
+import InputField from "../components/inputfield"
 
 interface Props { }
 
@@ -15,62 +16,21 @@ const Form: FC<Props> = ({ }) => {
                 <Nav />
             </div>
             <div className={style.container}>
-
-
                 <form>
-                    <div className={style.input_field}>
-                        <label htmlFor="transport"><p>Transport name, number:</p></label>
-                        <div className={style.input_line} >
-                            <input type="text" name="transport" placeholder="Transport" autoComplete="off" />
-                        </div>
-                        <div className={style.icon}>
-                            <img src="/images/lock_mail.svg" alt="lock_mail.svg" />
-                        </div>
-                    </div>
-
-                    <div className={style.input_field}>
-                        <label htmlFor="departure_location"><p>Departure location & time:</p></label>
-                        <div className={style.input_line} >
-                            <input type="text" name="departure_location" placeholder="Departure location" autoComplete="off" />
-                        </div>
-                        <div className={style.icon}>
-                            <img src="/images/lock_mail.svg" alt="lock_mail.svg" />
-                        </div>
-                    </div>
+                    <InputField classNames={style} labelFor={"transport"} labelContent={"Transport name, number:"} placeholder={"Transport"} type={"text"} prefixImgSrc="/images/lock_mail.svg" />
+                    <InputField classNames={style} labelFor={"departure"} labelContent={"Departure location & time:"} placeholder={"Departure location"} type={"text"} prefixImgSrc="/images/lock_mail.svg" />
                     <div className={style.inline_container}>
-                        <select className={style.dropdown}>
-                            <option value="Hi">Year</option>
-                        </select>
-                        <select className={style.dropdown}>
-                            <option value="Hi">Month</option>
-                        </select>
-                        <select className={style.dropdown}>
-                            <option value="Hi">Day</option>
-                        </select>
+                        <Dropdown className={style} values={["Year", "2021", "2022"]} />
+                        <Dropdown className={style} values={["Month", "1", "2", "3", "4"]} />
+                        <Dropdown className={style} values={["Day", "1", "2"]} />
                     </div>
-
-                    <div className={style.input_field}>
-                        <label htmlFor="departure_location"><p>Arrival location & time:</p></label>
-                        <div className={style.input_line} >
-                            <input type="text" name="departure_location" placeholder="Arrival location" autoComplete="off" />
-                        </div>
-                        <div className={style.icon}>
-                            <img src="/images/lock_mail.svg" alt="lock_mail.svg" />
-                        </div>
-                    </div>
+                    <InputField classNames={style} labelFor={"arrival"} labelContent={"Arrival location & time:"} placeholder={"Arrival location"} type={"text"} prefixImgSrc="/images/lock_mail.svg" />
                     <div className={style.inline_container}>
-                        <select className={style.dropdown}>
-                            <option value="Hi">Year</option>
-                        </select>
-                        <select className={style.dropdown}>
-                            <option value="Hi">Month</option>
-                        </select>
-                        <select className={style.dropdown}>
-                            <option value="Hi">Day</option>
-                        </select>
+                        <Dropdown className={style} values={["Year", "2021", "2022"]} />
+                        <Dropdown className={style} values={["Month", "1", "2", "3", "4"]} />
+                        <Dropdown className={style} values={["Day", "1", "2"]} />
                     </div>
                     <br />
-
                     <label htmlFor="children"><p>Traveling with children?</p></label>
                     <div className={style.inline_container}>
                         <div>
@@ -80,8 +40,7 @@ const Form: FC<Props> = ({ }) => {
                             No:  <input type="radio" name="children" value="false" />
                         </div>
                     </div>
-
-                    <button className={style.btn}>Save</button>
+                    <Button className={style.btn} content={"Save"} />
                 </form>
             </div>
         </>

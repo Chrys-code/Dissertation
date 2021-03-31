@@ -1,7 +1,6 @@
 /////////////////
 // BUTTON
 /////////////////
-
 @mixin button($height, $width, $color, $textColor, $shadowColorDark, $shadowColorLight) {
     .btn {
         position: relative;
@@ -45,10 +44,3 @@
     @content;
 
 }
-  
-
-/* JSX SAMPLE:
-
-<button className={style.btn}>Login</button>
-
-*/

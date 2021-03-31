@@ -1,5 +1,5 @@
-@import "./lib/components/inputfield.scss";
-@import "./lib/components/button.scss";
+@import "./lib/components/inputfield.module.scss";
+@import "./lib/components/button.module.scss";
 @import "./lib/palette.scss";
 
 .container {
@@ -10,7 +10,7 @@
     justify-content: center;
     width: 100%;
     padding: 0px 15px 0px 15px;
-    height: 100vh;
+    min-height: 100vh;
 
     // Logo
     @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowLight);

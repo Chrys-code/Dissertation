@@ -1,12 +1,13 @@
-import React, { FC, useEffect, useState } from "react";
-import { GetServerSideProps } from 'next';
+import React, { FC } from "react";
 import Link from "next/link";
 import Head from 'next/head';
 import style from "../../styles/signin_style.module.scss";
+import Button from "../components/button"
+import InputField from "../components/inputfield"
 
 interface Props { }
 
-const Home: FC<Props> = ({ }) => {
+const Signin: FC<Props> = ({ }) => {
 
     return (
         <div className={style.container}>
@@ -15,26 +16,10 @@ const Home: FC<Props> = ({ }) => {
             </div>
             <p>All the details in one place</p>
             <form>
-                <div className={style.input_field}>
-                    <div className={style.input_line} >
-                        <input type="text" name="email" placeholder="Email" autoComplete="off" />
-                    </div>
-                    <div className={style.icon}>
-                        <img src="/images/lock_mail.svg" alt="lock_mail.svg" />
-                    </div>
-                </div>
-                <div className={style.input_field}>
-                    <div className={style.input_line}>
-                        <input type="password" name="password" placeholder="Password" />
-                    </div>
-                    <div className={style.icon}>
-                        <img src="/images/lock_password.svg" alt="lock_password.svg" />
-                    </div>
-                </div>
-
-                <button className={style.btn}>Sign In</button>
+                <InputField classNames={style} labelFor={""} labelContent={""} placeholder={"Email"} type={"text"} prefixImgSrc="/images/lock_mail.svg" />
+                <InputField classNames={style} labelFor={""} labelContent={""} placeholder={"Password"} type={"password"} prefixImgSrc="/images/lock_password.svg" />
+                <Button className={style.btn} content={"Sign In"} />
             </form>
-
             <Link href="/signup" >
                 <a><p className={style.signup}>Sign Up</p></a>
             </Link>
@@ -42,4 +27,4 @@ const Home: FC<Props> = ({ }) => {
     )
 }
 
-export default Home
+export default Signin

@@ -1,6 +1,6 @@
-@import "./lib/components/inputfield.scss";
-@import "./lib/components/button.scss";
-@import "./lib//components/dropdown.scss";
+@import "./lib/components/inputfield.module.scss";
+@import "./lib/components/button.module.scss";
+@import "./lib//components/dropdown.module.scss";
 @import "./lib/palette.scss";
 
 .navbar {
@@ -15,8 +15,8 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    padding: 68px 15px 0px 15px;
-    height: 100vh;
+    padding: 68px 15px 68px 15px;
+    min-height: 100vh;
     // Logo
     @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowLight);
     form {
