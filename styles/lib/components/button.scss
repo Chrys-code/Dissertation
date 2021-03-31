@@ -27,6 +27,7 @@
           bottom: 0;
           border-radius: 10px;
           box-shadow: -2px -2px 4px $shadowColorLight;
+          pointer-events: none;
         }
 
         &:focus {
@@ -37,6 +38,7 @@
         &:focus:after {
             content: "";
             box-shadow: -1px -1px 2px $White;
+            pointer-events: none;
           }  
     }
 

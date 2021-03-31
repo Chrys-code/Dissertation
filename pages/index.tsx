@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from "react"
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { covidData } from "../lib/coviddata"
+import style from "../styles/index_style.module.scss";
+import Nav from "./components/navbar"
 
 interface Props {
   covidProps: Array<String>;
@@ -16,10 +18,14 @@ const Home: FC<Props> = ({ covidProps }: Props) => {
   }, [])
 
   return (
-    <div >
-      <h1>Im ur app</h1>
-
-    </div>
+    <>
+      <div className={style.navbar}>
+        <Nav />
+      </div>
+      <div className={style.container}>
+        CONTENT HERE
+      </div>
+    </>
   )
 }
 
