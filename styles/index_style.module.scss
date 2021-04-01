@@ -1,7 +1,9 @@
-@import "./lib/components/inputfield.module.scss";
 @import "./lib/components/button.module.scss";
-@import "./lib//components/dropdown.module.scss";
+@import "./lib//components/prespad.module.scss";
+@import "./lib/components/dropdown.module.scss";
+@import "./lib/fontslib.scss";
 @import "./lib/palette.scss";
+
 
 .navbar {
     position: fixed;
@@ -10,11 +12,37 @@
 }
 .container {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
     text-align: center;
     width: 100%;
     padding: 68px 15px 68px 15px;
     min-height: 100vh;
+
+    .diagram {
+        @include prespad(300px, 345px,  $shadowDark, $shadowLight) {
+            .prespad {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                text-align: start;
+            }
+            h2 {
+                @include mobile_h2($General)
+            }
+            p {
+                @include mobile_primary($General, 400)
+            }
+    
+           @include dropdown(36px, 120px, $General, $shadowDark, $shadowLight)
+        }
+    }
+    @include prespad(150px, 345px,  $shadowDark, $shadowLight) {
+        h2 {
+            @include mobile_h2($White)
+        }
+        p {
+            @include mobile_primary($White, 400)
+        }
+    };
 }

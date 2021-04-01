@@ -2,7 +2,7 @@
 // DROPDOWN
 /////////////////
 
-@mixin dropdown($height, $width, $color, $background, $shadowDark, $shadowLight) {
+@mixin dropdown($height, $width, $color, $shadowDark, $shadowLight) {
     .dropdown {
         position: relative;
         color: $color;

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 interface Props {
-    className: string,
+    className: any,
     content: string,
 }
 

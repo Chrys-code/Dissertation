@@ -37,7 +37,7 @@
             justify-content: space-evenly;
             align-items: center;
             // Dropdowns
-            @include dropdown(42px, 90px, $General, $background, $shadowDark, $shadowDark);
+            @include dropdown(42px, 90px, $General, $shadowDark, $shadowDark);
         }
         // Save button
         @include button(48px, 100%, $background, $Green,  $shadowDark, $shadowLight);

@@ -15,7 +15,7 @@ const Nav: FC<Props> = ({ }) => {
             </button>
 
             <div className={style.profile}>
-                <p id={style.profile_name} >Sample name here</p>
+                <p id={style.profile_name} >Name here</p>
                 <button className={style.btn} type="submit">
                     pic
             </button>
