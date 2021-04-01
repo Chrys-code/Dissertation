@@ -4,12 +4,39 @@
 @import "./lib/fontslib.scss";
 @import "./lib/palette.scss";
 
-
+// Navigation header
 .navbar {
     position: fixed;
     width: 100%;
     z-index: 100;
+
+    // Profile
+    @include prespad(100vh, 100vw,  $shadowDark, $shadowLight){
+        .prespad {
+            position: absolute;
+            overflow-y:auto; 
+            background: $background;
+            padding: 0px 30px 0px 30px;
+            margin: 0;
+            transform: translateX(110%);
+            transition: 0.4s ease-in-out;
+            z-index: -1;
+
+            h1{
+                text-align: center
+            }
+            // QR code pres pad
+            @include prespad(300px, 300px,  $shadowDark, $shadowLight){
+                .prespad {
+                    margin: auto;
+                    margin-bottom: 100px;
+                }
+            }
+        }
+    };
 }
+
+// Page content container
 .container {
     position: relative;
     display: grid;
@@ -18,7 +45,10 @@
     width: 100%;
     padding: 68px 15px 68px 15px;
     min-height: 100vh;
+    overflow-x: hidden;
 
+
+    // Presentation Pad for Python plotlib diagram
     .diagram {
         @include prespad(300px, 345px,  $shadowDark, $shadowLight) {
             .prespad {
@@ -37,6 +67,8 @@
            @include dropdown(36px, 120px, $General, $shadowDark, $shadowLight)
         }
     }
+
+    // Presentation Pad for other pages in the app (link)
     @include prespad(150px, 345px,  $shadowDark, $shadowLight) {
         h2 {
             @include mobile_h2($White)
