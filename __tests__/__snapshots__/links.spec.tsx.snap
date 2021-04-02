@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index should render without throwing an error 1`] = `
+Array [
+  <div
+    className="navbar"
+  >
+    <div
+      className="container"
+    >
+      <button
+        className="btn"
+        type="submit"
+      >
+        ←
+      </button>
+      <div
+        className="profile"
+      >
+        <p
+          id="profile_name"
+        >
+          Name here
+        </p>
+        <button
+          className="btn"
+          type="submit"
+        >
+          <img
+            alt="avatar"
+            src="/images/avatar.svg"
+          />
+        </button>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="container"
+  >
+    <div
+      className="link"
+      href="https://www.w3schools.com/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <div
+        className="icon"
+      >
+        <img
+          alt=""
+          src="/images/globe.svg"
+        />
+      </div>
+      <div>
+        <h2>
+          W3 schools
+        </h2>
+        <p>
+          test link description
+        </p>
+      </div>
+    </div>
+    <div
+      className="link"
+      href="https://www.w3schools.com/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <div
+        className="icon"
+      >
+        <img
+          alt=""
+          src="/images/globe.svg"
+        />
+      </div>
+      <div>
+        <h2>
+          W3 schools
+        </h2>
+        <p>
+          test link description
+        </p>
+      </div>
+    </div>
+    <div
+      className="link"
+      href="https://www.w3schools.com/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <div
+        className="icon"
+      >
+        <img
+          alt=""
+          src="/images/globe.svg"
+        />
+      </div>
+      <div>
+        <h2>
+          W3 schools
+        </h2>
+        <p>
+          test link description
+        </p>
+      </div>
+    </div>
+    <div
+      className="link"
+      href="https://www.w3schools.com/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <div
+        className="icon"
+      >
+        <img
+          alt=""
+          src="/images/globe.svg"
+        />
+      </div>
+      <div>
+        <h2>
+          W3 schools
+        </h2>
+        <p>
+          test link description
+        </p>
+      </div>
+    </div>
+    <button
+      className="btn"
+    >
+      Add
+    </button>
+  </div>,
+]
+`;
