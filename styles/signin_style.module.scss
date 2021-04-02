@@ -1,5 +1,6 @@
 @import "./lib/components/inputfield.module.scss";
 @import "./lib/components/button.module.scss";
+@import "./lib/components/prespad.module.scss";
 @import "./lib/palette.scss";
 
 .container {
@@ -11,9 +12,7 @@
     width: 100%;
     padding: 0px 15px 0px 15px;
     min-height: 100vh;
-
-    // Logo
-    @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowLight);
+    @include prespad(110px, 170px, $shadowDark, $shadowLight);
 
     form {
         width: 75%;
@@ -23,7 +22,7 @@
         @include button(48px, 100%, $background, $Green,  $shadowDark, $shadowLight);
     }
 
-    .signup {
+    .link {
         color: $ColorError
     }
 }
