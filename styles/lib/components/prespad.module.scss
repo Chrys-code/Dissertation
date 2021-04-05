@@ -2,7 +2,7 @@
 // PRESPAD
 /////////////////
 
-@mixin prespad($height, $width, $shadowDark, $shadowLight) {
+@mixin prespad($height: 110px, $width: 170px, $shadowDark: $shadowDark, $shadowLight: $shadowLight) {
     .prespad {
         position: relative;
         width: $width;
@@ -13,7 +13,6 @@
         border-bottom: 1px solid $shadowDark;
         border-radius: 10px;
         box-shadow: 2px 2px 4px $shadowDark;
-        
         &:after {
             content: '';
             position: absolute;
@@ -27,19 +26,14 @@
             border-radius: 10px;
             box-shadow: -2px -2px 4px $shadowLight;
         }
-
         img {
           position: absolute;
           top: 50%; 
           left: 50%;
           transform: translate(-50%,-50%);
-          z-index: -1;
-          width: 100%;
           object-fit: cover;
+          z-index: -1;
         }
-
-
     }
     @content;
-
 }

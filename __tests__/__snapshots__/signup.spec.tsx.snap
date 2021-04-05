@@ -7,12 +7,12 @@ exports[`signup snapshot should render without throwing an error 1`] = `
   <div
     className="prespad"
   >
+    
+    
     <img
       alt="logo.svg"
       src="/images/Iconlogo.svg"
     />
-    
-    
   </div>
   <p>
     All the details in one place
