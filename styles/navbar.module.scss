@@ -9,7 +9,7 @@
     align-items: center;
     max-height: 68px;
     background: $navbackground;
-    @include button(48px, 48px, $background, $Green,  $shadowDark, $shadowLight){
+    @include button($width:48px){
         .btn {
             transform: translateY(-25%);
         }
@@ -22,7 +22,6 @@
         #profile_name {
             margin-right: 10px;
         }
-
         img {
             position: absolute;
             top: 50%;

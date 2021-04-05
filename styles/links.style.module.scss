@@ -13,9 +13,8 @@
     grid-template-columns: repeat(1, 1fr);
     text-align: center;
     width: 100%;
-    padding: 68px 15px 68px 15px;
-
-    @include link(56px, 100%, $shadowDark, $shadowLight){
+    padding: 102px 15px 68px 15px;
+    @include link {
         h2 {
             margin: 5px 5px 0px 5px;
         }
@@ -23,7 +22,5 @@
             margin: 0px 5px 0px 5px;
         }
     };
-
-    @include button(42px, 100%, $background, $Green, $shadowDark, $shadowLight);
-
+    @include button;
 }

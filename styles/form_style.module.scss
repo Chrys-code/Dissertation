@@ -17,12 +17,10 @@
     width: 100%;
     padding: 68px 15px 15px 15px;
     min-height: 100vh;
-    // Logo
-    @include button(105px, 170px, $background, $Green,  $shadowDark, $shadowLight);
     form {
         width: 75%;
         // Input fields
-        @include input_field($background, $shadowDark, $shadowLight){
+        @include input_field {
             margin-top: 50px;
             margin-bottom: 10px;
             label {
@@ -37,10 +35,10 @@
             justify-content: space-evenly;
             align-items: center;
             // Dropdowns
-            @include dropdown(42px, 90px, $General, $shadowDark, $shadowDark);
+            @include dropdown;
         }
         // Save button
-        @include button(48px, 100%, $background, $Green,  $shadowDark, $shadowLight);
+        @include button($shadowDark: $Green);
     }
 }
 
