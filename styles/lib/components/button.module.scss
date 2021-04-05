@@ -1,20 +1,22 @@
 /////////////////
 // BUTTON
 /////////////////
-@mixin button($height: 48px, $width: 100%, $textColor: $Green, $shadowDark: $shadowDark, $shadowLight: $shadowLight) {
+@mixin button($height, $width, $color, $textColor, $shadowColorDark, $shadowColorLight) {
     .btn {
         position: relative;
         width: $width;
         height: $height;
         border: none;
         border-radius: 8px;
-        box-shadow: 2px 2px 4px $shadowDark;
+        box-shadow: 2px 2px 4px $shadowColorDark;
         font-size: 18px;
         font-weight: bold;
         color: $textColor;
+        background-color: $color;
         margin-top: 24px;
         text-align: center;
         outline: none;
+
         &:after {
           content: "";
           position: absolute;
@@ -23,13 +25,15 @@
           right: 0;
           bottom: 0;
           border-radius: 10px;
-          box-shadow: -2px -2px 4px $shadowLight;
+          box-shadow: -2px -2px 4px $shadowColorLight;
           pointer-events: none;
         }
+
         &:focus {
             box-shadow: 1px 1px 2px $Green;
             font-size: 17px;
           }
+          
         &:focus:after {
             content: "";
             box-shadow: -1px -1px 2px $White;

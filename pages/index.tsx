@@ -13,11 +13,11 @@ interface Props {
 }
 
 const Home: FC<Props> = ({ covidProps }: Props) => {
-  const [data, setData] = useState([])
+  //const [data, setData] = useState([])
 
   useEffect(() => {
     //setData(covidProps)
-    // console.log(covidProps)
+    //console.log(covidProps)
   }, [])
 
   return (
@@ -67,7 +67,6 @@ const Home: FC<Props> = ({ covidProps }: Props) => {
         <Link href="/links" >
           <a><PresPad className={style.prespad} imageSrc={"/images/links.svg"} alt={"blue_backgroun_img"} head={"Informations"} text={"See a list of useful links, or collect yourself"} /></a>
         </Link>
-
       </div>
 
     </>
@@ -82,10 +81,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
   return { props: { covidProps: data } }
 }
 
-        <div>
-          {data.map((data, index) => { return (<p key={index}>{data.country}</p>) })}
-        </div>
-
+<div>
+{data.map((data, index) => { return (<p key={index}>{data.country}</p>) })}
+</div>
 */
-
 

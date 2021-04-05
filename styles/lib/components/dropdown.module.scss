@@ -2,7 +2,7 @@
 // DROPDOWN
 /////////////////
 
-@mixin dropdown($height: 42px, $width: 120px, $color: $General, $shadowDark: $shadowDark, $shadowLight: $shadowLight) {
+@mixin dropdown($height, $width, $color, $shadowDark, $shadowLight) {
     .dropdown {
         position: relative;
         color: $color;
@@ -21,5 +21,7 @@
         background-position-x: 90%;
         background-position-y: 45%;    
     }
+
     @content;
+
 }

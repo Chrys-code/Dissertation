@@ -2,11 +2,12 @@
 // INPUT FIELD
 /////////////////
 
-@mixin input_field($color: $background, $shadowDark: $shadowDark, $shadowLight: $shadowLight) {
+@mixin input_field($color, $shadowColorDark, $shadowColorLight) {
     .input_field {
         position: relative;
         width: 100%;
         margin: 24px 0px 24px 0px;
+
         .input_line {
             position: relative;
             display: flex;
@@ -14,10 +15,11 @@
             height: 42px;
             padding-left: 60px;
             width: 100%;
-            border-top: 1px solid $shadowDark;
-            border-left: 1px solid $shadowDark;
+            border-top: 1px solid $shadowColorDark;
+            border-left: 1px solid $shadowColorDark;
             border-radius: 20px;
-            box-shadow: inset 2px 2px 4px $shadowDark;    
+            box-shadow: inset 2px 2px 4px $shadowColorDark;    
+
             &:after {
                 content: '';
                 position: absolute;
@@ -25,18 +27,20 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                border-bottom: 1px solid $shadowLight;
-                border-right: 1px solid $shadowLight;
+                border-bottom: 1px solid $shadowColorLight;
+                border-right: 1px solid $shadowColorLight;
                 border-radius: 20px;
-                box-shadow: inset -2px -2px 4px $shadowLight;
+                box-shadow: inset -2px -2px 4px $shadowColorLight;
                 pointer-events: none;
               }
+
             input {
                 outline: none;
                 border: none;
                 background: $color; 
             }
         }
+
         .icon {
             position: absolute;
             top: 3px;
@@ -48,6 +52,8 @@
             align-items: center;
             z-index: 10;
         }
+
         @content;
+        
     }
 }

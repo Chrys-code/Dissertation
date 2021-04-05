@@ -17,8 +17,8 @@ const Nav: FC<Props> = ({ }) => {
             <div className={style.profile}>
                 <p id={style.profile_name} >Name here</p>
                 <button className={style.btn} type="submit">
-                    <img src="/images/avatar.svg" alt="avatar" />
-                </button>
+                    pic
+            </button>
             </div>
         </div>
     )

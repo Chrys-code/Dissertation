@@ -6,6 +6,7 @@ import Link from "../components/link";
 import Button from "../components/button";
 
 interface Props {
+    covidProps: Array<String>;
 }
 
 const Links: FC<Props> = ({ }: Props) => {
