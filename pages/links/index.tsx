@@ -16,10 +16,10 @@ const Links: FC<Props> = ({ }: Props) => {
                 <Nav />
             </div>
             <div className={style.container}>
-                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} />
-                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} />
-                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} />
-                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} />
+                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} alt={"globe.svg"} />
+                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} alt={"globe.svg"} />
+                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} alt={"globe.svg"} />
+                <Link className={style} link={"https://www.w3schools.com/"} head={"W3 schools"} text={"test link description"} imgSrc={"/images/globe.svg"} alt={"globe.svg"} />
                 <Button className={style.btn} content={"Add"} />
             </div>
         </>

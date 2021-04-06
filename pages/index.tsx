@@ -11,8 +11,8 @@ import PresPad from "./components/prespad";
 interface Props {
   covidProps: Array<String>;
 }
-
-const Home: FC<Props> = ({ covidProps }: Props) => {
+// const Home: FC<Props> = ({ covidProps }: Props) => {
+const Home: FC = ({ }) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -49,8 +49,6 @@ const Home: FC<Props> = ({ covidProps }: Props) => {
           <p>Sample</p>
 
           <PresPad className={style.prespad} imageSrc={"/images/qr.svg"} alt={"qr_code_smaple"} head={""} text={""} />
-
-
         </PresPad>
       </div>
 

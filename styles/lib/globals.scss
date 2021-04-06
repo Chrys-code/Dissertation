@@ -20,22 +20,22 @@ a {
 }
 
 h1 {
-    @include tablet_h1($General);
+  @include mobile_h1($General);
   @include sm {
-    @include mobile_h1($General);
+    @include tablet_h1($General);
   }
 }
 
 h2 {
-    @include tablet_h2($General);
+  @include mobile_h2($General);
   @include sm {
-   @include mobile_h2($General);
+   @include tablet_h2($General);
   }
 }
 
 p {
-  @include tablet_primary($General, $regular);
+  @include mobile_primary($General, $regular);
   @include sm {
-   @include mobile_primary($General, $regular);
+    @include tablet_primary($General, $regular);
   }
 }

@@ -1,13 +1,13 @@
 // Breakpoints
-$tablet: 992px;
-$mobile: 560px;
+$desktop: 992px;
+$tablet: 560px;
 
 ////////////////////////////
 // MAX WIDTH 992px;
 ////////////////////////////
 
 @mixin md {
-  @media (max-width: $tablet) {
+  @media (min-width: $desktop) {
     @content;
   }
 }
@@ -17,7 +17,7 @@ $mobile: 560px;
 ////////////////////////////
 
 @mixin sm {
-  @media (max-width: $mobile) {
+  @media (min-width: $tablet) {
     @content;
   }
 }
