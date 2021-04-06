@@ -7,15 +7,16 @@ interface Props {
     imgSrc: string,
     head: string,
     text: string,
+    alt: string,
 }
 
-const Dropdown: FC<Props> = ({ className, link, head, text, imgSrc }) => {
+const Dropdown: FC<Props> = ({ className, link, head, text, imgSrc, alt }) => {
 
     return (
         <Link href={link} passHref={true}>
             <div className={className.link}>
                 <div className={className.icon}>
-                    <img src={imgSrc} alt="" />
+                    <img src={imgSrc} alt={alt} />
                 </div>
 
                 <div>
