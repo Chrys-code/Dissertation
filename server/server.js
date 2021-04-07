@@ -67,6 +67,8 @@ mongoose.connection.on('open', () => {
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("../client/build"));
 }
+*
+* This is for REACT not Next !!!
 */
 
 //////////////////////

@@ -10,7 +10,7 @@ const UserSession = require('../models/usersession');
 //////////////////////
 // SIGNIN
 //////////////////////
-router.post("/signin", (req, res, next) => {
+router.post("/signin", (req, res) => {
     const { body } = req;
     const { email, password } = body;
 

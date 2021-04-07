@@ -10,12 +10,8 @@ const UserSession = require('../models/usersession');
 //////////////////
 // SIGNUP
 //////////////////
-router.post("/signup", (req, res, next) => {
-    const { body } = req;
-    console.log("body", body);
-
-    const { firstname, lastname, email, password } = body;
-
+router.post("/signup", (req, res) => {
+    const { firstname, lastname, email, password } = req.body;
     if (!firstname) {
         return res.send({
             success: false,
