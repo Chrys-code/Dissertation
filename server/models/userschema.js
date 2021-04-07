@@ -39,8 +39,8 @@ const userSchema = new Schema({
         required: { location: false, time: false }
     },
     transport: {
-        type: Array,
-        default: [],
+        type: String,
+        default: "",
         required: false
     },
     links: {

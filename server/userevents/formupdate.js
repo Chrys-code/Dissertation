@@ -8,9 +8,25 @@ const UserSession = require('../models/usersession');
 // Saving user data
 //////////////////////
 
-router.post("/form", (req, res, next) => {
-    const { body } = req;
-    const { userId, departureLocation, departureTime, arrivalLocation, arrivalTime, children, transport } = body;
+router.post("/form", (req, res) => {
+    const {
+        userId, transport,
+        departure, departure_year,
+        departure_month, departure_day,
+        arrival, arrival_year,
+        arrival_month, arrival_day,
+        children
+    } = req.body;
+
+    console.log(userId, transport,
+        departure, departure_year,
+        departure_month, departure_day,
+        arrival, arrival_year,
+        arrival_month, arrival_day,
+        children
+    )
+    const arrivalTime = `${arrival_year}.${arrival_month}.${arrival_day}`;
+    const departureTime = `${departure_year}.${departure_month}.${departure_day}`;
 
     if (!userId) {
         return res.send({
@@ -19,14 +35,14 @@ router.post("/form", (req, res, next) => {
         });
     }
 
-    if (!departureLocation || !departureTime) {
+    if (!departure || !departureTime || !departure_year || !departure_month || !departure_day) {
         return res.send({
             success: false,
             message: "Error: Departure location & time cannot be blank.",
         });
     }
 
-    if (!arrivalLocation || !arrivalTime) {
+    if (!arrival || !arrivalTime || !arrival_year || !arrival_month || !arrival_day) {
         return res.send({
             success: false,
             message: "Error: Arrival location & time cannot be blank.",
@@ -55,15 +71,15 @@ router.post("/form", (req, res, next) => {
             $set: {
                 children: children,
                 departure: {
-                    location: departureLocation,
+                    location: departure,
                     time: departureTime
                 },
                 arrival: {
-                    location: arrivalLocation,
+                    location: arrival,
                     time: arrivalTime
                 },
                 transport: transport,
-                updated: Date.new()
+                updated: Date.now()
             },
         },
         null,
