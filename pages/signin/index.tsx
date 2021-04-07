@@ -32,6 +32,7 @@ const Signin: FC<Props> = ({ }) => {
             }
         })
         const response = data.json()
+        console.log(response)
     }
 
     return (
