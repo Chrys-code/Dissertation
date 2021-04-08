@@ -5,7 +5,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-require("dotenv/config")
+const session = require('express-session');
+require("dotenv/config");
 
 //////////////////////
 // MODULES
@@ -14,7 +15,7 @@ require("dotenv/config")
 const signout = require('./auth/signout');
 const signin = require('./auth/signin');
 const signup = require('./auth/signup');
-const session = require('./auth/session');
+const verify = require('./auth/session');
 // App Event
 const profiledata = require('./appevents/profiledata');
 const linkdata = require('./appevents/linkdata');
@@ -35,11 +36,19 @@ app.use(cors());
 //////////////////////
 // ROUTES
 //////////////////////
+// Session
+app.use(session({
+    secret: 'key',
+    resave: false,
+    saveUninitialized: false,
+}))
+// Session Verification from Client side
+app.use("/api", verify);
 // Auth
 app.use("/api", signin);
 app.use("/api", signup);
-app.use("/api", session);
 app.use("/api", signout);
+
 // App Events
 app.use("/api", profiledata);
 app.use("/api", linkdata);
@@ -75,5 +84,6 @@ if (process.env.NODE_ENV === "production") {
 // RUN PORT 8080
 //////////////////////
 const PORT = process.env.PORT || 8080;
+console.log(`app listen to: ${PORT}`)
 app.listen(PORT)
 

@@ -11,9 +11,12 @@ const UserSession = require('../models/usersession');
 // SIGNIN
 //////////////////////
 router.post("/signin", (req, res) => {
-    const { body } = req;
+
+    const { body, session } = req;
     const { email, password } = body;
 
+    // Check if all data is supplied by the user
+    // Create feedback
     if (!email) {
         return res.send({
             success: false,
@@ -28,6 +31,7 @@ router.post("/signin", (req, res) => {
         });
     }
 
+    // Find existing user
     User.find(
         {
             email: email,
@@ -49,26 +53,32 @@ router.post("/signin", (req, res) => {
             const user = users[0];
             if (!user.validPassword(password)) {
                 return res.send({
-                    sucess: false,
+                    success: false,
                     message: "Error: Invalid Username or Password!",
                 });
             }
 
+            // If a user is found
+            // Open a tracked session in the DataBase
             const newSession = new UserSession();
             newSession.userId = user._id;
             newSession.save((err, doc) => {
                 if (err) {
                     return res.send({
-                        sucess: false,
+                        success: false,
                         message: `Error: Failed to create session, ${err}`,
                     });
                 }
-                return res.send({
+
+                // Save new document id (from DataBase/session) to express session sessionId
+                // Save user ID from database to session for operational tasks in the app
+                session.sessionId = doc._id;
+                session.user = user;
+                // Sending the data back is not necessary and exposes sensitive data
+                // Sending feedback is not necessary as user is automatically redirected
+                return res.status(200).send({
                     success: true,
-                    message: "Signed In",
-                    token: doc._id,
-                    id: user._id,
-                });
+                })
             });
         }
     );
