@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import Link from "next/link";
-import Head from 'next/head';
+import { useRouter } from 'next/router'
 import style from "../../styles/signin_style.module.scss";
 import Button from "../components/button"
 import InputField from "../components/inputfield"
@@ -9,6 +9,7 @@ import PresPad from "../components/prespad";
 interface Props { }
 
 const Signin: FC<Props> = ({ }) => {
+    const router = useRouter()
 
     // User data
     const [inputData, setInputData] = useState<object>({})
@@ -31,8 +32,10 @@ const Signin: FC<Props> = ({ }) => {
                 'Accept': 'application/json'
             }
         })
-        const response = data.json()
-        console.log(response)
+        const response = await data.json()
+        if (response.success == true) {
+            router.push('/')
+        }
     }
 
     return (
