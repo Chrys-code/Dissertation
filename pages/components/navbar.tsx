@@ -4,9 +4,11 @@ import Link from "next/link";
 import Head from 'next/head';
 import style from "../../styles/navbar.module.scss";
 
-interface Props { }
+interface Props {
+    userData: any,
+}
 
-const Nav: FC<Props> = ({ }) => {
+const Nav: FC<Props> = ({ userData }) => {
 
     return (
         <div className={style.container} >
@@ -15,7 +17,7 @@ const Nav: FC<Props> = ({ }) => {
             </button>
 
             <div className={style.profile}>
-                <p id={style.profile_name} >Name here</p>
+                <p id={style.profile_name} >{userData.user.firstname}</p>
                 <button className={style.btn} type="submit">
                     <img src="/images/avatar.svg" alt="avatar" />
                 </button>

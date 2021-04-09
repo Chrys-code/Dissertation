@@ -1,10 +1,11 @@
-import React, { FC, useState } from "react";
-import Link from "next/link";
+import React, { FC, useState, useEffect } from "react"
+import Link from "next/link"
 import { useRouter } from 'next/router'
-import style from "../../styles/signin_style.module.scss";
+import style from "../../styles/signin_style.module.scss"
 import Button from "../components/button"
 import InputField from "../components/inputfield"
-import PresPad from "../components/prespad";
+import PresPad from "../components/prespad"
+import cookie from "js-cookie"
 
 interface Props { }
 
@@ -13,6 +14,12 @@ const Signin: FC<Props> = ({ }) => {
 
     // User data
     const [inputData, setInputData] = useState<object>({})
+    const [token, setToken] = useState<string>("")
+
+    useEffect(() => {
+        cookie.set("token", token)
+    }, [token])
+
 
     // User Data update dynamically listening onChange
     const handleInput = (e) => {
@@ -33,7 +40,9 @@ const Signin: FC<Props> = ({ }) => {
             }
         })
         const response = await data.json()
-        if (response.success == true) {
+
+        if (response && response.success == true && response.token) {
+            setToken(response.token);
             router.push('/')
         }
     }
