@@ -12,10 +12,11 @@ const UserSession = require('../models/usersession');
 router.post("/signout", (req, res, next) => {
     const { body } = req;
     const { token } = body;
+    const tokenSliced = token.split("=")[1]
 
     UserSession.findOneAndUpdate(
         {
-            _id: token,
+            _id: tokenSliced,
             isValid: true,
         },
         {
@@ -35,7 +36,6 @@ router.post("/signout", (req, res, next) => {
 
             return res.send({
                 success: true,
-                token: token,
                 message: "Success: Session successfully terminated",
             });
         }

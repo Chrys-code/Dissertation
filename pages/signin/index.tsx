@@ -15,6 +15,8 @@ const Signin: FC<Props> = ({ }) => {
     // User data
     const [inputData, setInputData] = useState<object>({})
     const [token, setToken] = useState<string>("")
+    // Feedback
+    const [buttonLabel, setButtonLabel] = useState<string>("Sign In")
 
     // Set session cookie
     useEffect(() => {
@@ -42,6 +44,14 @@ const Signin: FC<Props> = ({ }) => {
         })
         const response = await data.json()
 
+        if (response && response.success == false) {
+            setButtonLabel(`${response.message}`)
+
+            setTimeout(() => {
+                setButtonLabel("Sign In")
+            }, 2000)
+        }
+
         if (response && response.success == true && response.token) {
             setToken(response.token);
             router.push('/')
@@ -55,7 +65,7 @@ const Signin: FC<Props> = ({ }) => {
             <form onSubmit={handleSubmit}>
                 <InputField classNames={style} labelFor="" labelContent="" name="email" placeholder="Email" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />
                 <InputField classNames={style} labelFor="" labelContent="" name="password" placeholder="Password" type="password" prefixImgSrc="/images/lock_password.svg" handleInput={handleInput} />
-                <Button className={style.btn} content="Sign In" />
+                <Button className={style.btn} content={buttonLabel} />
             </form>
             <Link href="/signup" >
                 <a><p className={style.link}>Sign Up</p></a>

@@ -15,27 +15,27 @@ router.post("/signup", (req, res) => {
     if (!firstname) {
         return res.send({
             success: false,
-            message: "Error: Firstname cannot be blank",
+            message: "Firstname cannot be blank",
         });
     }
     if (!lastname) {
         return res.send({
             success: false,
-            message: "Error: Lastname cannot be blank.",
+            message: "Lastname cannot be blank.",
         });
     }
 
     if (!email) {
         return res.send({
             success: false,
-            message: "Error: Email cennot be blank.",
+            message: "Email cennot be blank.",
         });
     }
 
     if (!password) {
         return res.send({
             success: false,
-            message: "Error: Password cannot be blank.",
+            message: "Password cannot be blank.",
         });
     }
 
@@ -43,16 +43,16 @@ router.post("/signup", (req, res) => {
         {
             email: email
         },
-        (err, previousUsers) => {
+        (err, users) => {
             if (err) {
                 return res.send({
                     success: false,
-                    message: `Error: Internal server error, please try again later, ${err}`,
+                    message: `Internal Error`,
                 });
-            } else if (previousUsers.length > 0) {
+            } else if (users.length != 1) {
                 return res.send({
                     success: false,
-                    message: "Error: Email is are already in use",
+                    message: "Email is are already in use",
                 });
             }
 
@@ -66,12 +66,23 @@ router.post("/signup", (req, res) => {
                 if (err) {
                     return res.send({
                         success: false,
-                        message: `Error: Failed to create account, please try again later, ${err}`,
+                        message: `Failed to create account`,
                     });
                 }
-                return res.send({
-                    success: true,
-                    message: "Success: Account created successfully",
+                // Open a tracked session in the DataBase
+                const newSession = new UserSession();
+                newSession.userId = newUser._id;
+                newSession.save((err, doc) => {
+                    if (err) {
+                        return res.send({
+                            success: false,
+                            message: `Failed to create session, try sign in`,
+                        });
+                    }
+                    return res.status(200).send({
+                        success: true,
+                        token: doc._id
+                    })
                 });
             });
         }

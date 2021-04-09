@@ -19,14 +19,14 @@ router.post("/signin", (req, res) => {
     if (!email) {
         return res.send({
             success: false,
-            message: "Error: Email cannot be blank.",
+            message: "Email cannot be blank",
         });
     }
 
     if (!password) {
         return res.send({
             success: false,
-            message: "Error: Password cannot be blank.",
+            message: "Password cannot be blank",
         });
     }
 
@@ -39,13 +39,13 @@ router.post("/signin", (req, res) => {
             if (err) {
                 return res.send({
                     success: false,
-                    message: `Error: Internal server error, ${err}`,
+                    message: `Server Error`,
                 });
             }
             if (users.length != 1) {
                 return res.send({
-                    sucess: false,
-                    message: `Error: Internal server error, ${err}`,
+                    success: false,
+                    message: `Invalid Username`,
                 });
             }
 
@@ -53,7 +53,7 @@ router.post("/signin", (req, res) => {
             if (!user.validPassword(password)) {
                 return res.send({
                     success: false,
-                    message: "Error: Invalid Username or Password!",
+                    message: "Invalid Password",
                 });
             }
 
@@ -65,7 +65,7 @@ router.post("/signin", (req, res) => {
                 if (err) {
                     return res.send({
                         success: false,
-                        message: `Error: Failed to create session, ${err}`,
+                        message: `Session Failed`,
                     });
                 }
 

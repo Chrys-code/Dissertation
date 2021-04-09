@@ -31,31 +31,35 @@
             transform: translate(-50%,-50%);
         }
     }
-    @include prespad(100vh, 100vw){
-        .prespad {
-            position: absolute;
-            top: 68px;
-            left: 0px;
-            overflow-y:auto; 
-            background: $background;
-            padding: 0px 30px 0px 30px;
-            margin: 0;
-            transform: translateX(105%);
-            transition: 0.4s ease-in-out;
-            z-index: -1;
-            h1{
-                text-align: center
-            }
-            // QR code pres pad
-            @include prespad(300px, 300px){
-                .prespad {
-                    position: relative;
-                    top: 0px;
-                    transform: translateX(0%);
-                    margin: auto;
-                    margin-bottom: 100px;
+
+    .profile_animation_container {
+        position: absolute;
+        top: 68px;
+        left: 0px;  
+        transform: translateX(105%);
+        @include prespad(100vh, 100vw){
+            .prespad {
+                position: relative;
+                overflow-y:auto; 
+                background: $background;
+                padding: 0px 30px 0px 30px;
+                margin: 0;
+                transition: 0.4s ease-in-out;
+                z-index: -1;
+                h1{
+                    text-align: center
+                }
+                // QR code pres pad
+                @include prespad(300px, 300px){
+                    .prespad {
+                        position: relative;
+                        top: 0px;
+                        margin: auto;
+                        margin-bottom: 100px;
+                    }
                 }
             }
-        }
-    };
+        };
+    
+    }
 }

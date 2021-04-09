@@ -16,6 +16,8 @@ const Signup: FC<Props> = ({ }) => {
     // User data
     const [inputData, setInputData] = useState<object>({})
     const [token, setToken] = useState<string>("")
+    // Feedback
+    const [buttonLabel, setButtonLabel] = useState<string>("Sign Up")
 
     // Set session cookie
     useEffect(() => {
@@ -42,6 +44,14 @@ const Signup: FC<Props> = ({ }) => {
         })
         const response = await data.json()
 
+        if (response && response.success == false) {
+            setButtonLabel(response.message)
+
+            setTimeout(() => {
+                setButtonLabel("Sign Up")
+            }, 2000)
+        }
+
         if (response && response.success == true && response.token) {
             setToken(response.token);
             router.push('/')
@@ -59,7 +69,7 @@ const Signup: FC<Props> = ({ }) => {
                 <InputField classNames={style} labelFor="" labelContent="" name="lastname" placeholder="Lastname" type="text" prefixImgSrc="/images/users.svg" handleInput={handleInput} />
                 <InputField classNames={style} labelFor="" labelContent="" name="email" placeholder="Email" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />
                 <InputField classNames={style} labelFor="" labelContent="" name="password" placeholder="Password" type="password" prefixImgSrc="/images/lock_password.svg" handleInput={handleInput} />
-                <Button className={style.btn} content="Sign Up" />
+                <Button className={style.btn} content={buttonLabel} />
             </form>
             <Link href="/signin" >
                 <a><p className={style.link}>Sign In</p></a>

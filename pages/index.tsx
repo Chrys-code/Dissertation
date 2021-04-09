@@ -22,20 +22,17 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
   const [response1, setResponse1] = useState([])
   const [response2, setResponse2] = useState([])
 
-  // Filter API data for user
+  // Filter API data for comparison1
   const handleInput1 = (e) => {
-    const filtered = covidData.filter((x) => x.country == e.target.value)
+    let filtered = covidData.filter((x) => x.country == e.target.value)
     setResponse1(filtered)
-    console.log(response1)
   }
 
-  // Filter API data for user
+  // Filter API data for comparison2
   const handleInput2 = (e) => {
-    const filtered = covidData.filter((x) => x.country == e.target.value)
+    let filtered = covidData.filter((x) => x.country == e.target.value)
     setResponse2(filtered)
-    console.log(filtered)
   }
-
 
   // "Please login here" when try to access the app without session
   const handleClick = (e) => {
@@ -62,69 +59,70 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
               {response1.length == 1 && response2.length == 1 ?
                 <>
                   <table>
-                    <tr>
-                      <th>Results</th>
-                      <th>{response1[0].country}</th>
-                      <th>{response2[0].country}</th>
-                    </tr>
-                    <tr>
-                      <td>
-                        Active cases:
+                    <tbody>
+                      <tr>
+                        <th>Results</th>
+                        <th>{response1[0].country}</th>
+                        <th>{response2[0].country}</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          Active cases:
                       </td>
-                      <td>
-                        {response1[0].cases.active}
+                        <td>
+                          {response1[0].cases.active}
+                        </td>
+                        <td>
+                          {response2[0].cases.active}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          New cases:
                       </td>
-                      <td>
-                        {response2[0].cases.active}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        New cases:
-                      </td>
-                      <td>
-                        {response1[0].cases.new}
-                      </td>
-                      <td>
-                        {response2[0].cases.new}
-                      </td>
-                    </tr>
+                        <td>
+                          {response1[0].cases.new}
+                        </td>
+                        <td>
+                          {response2[0].cases.new}
+                        </td>
+                      </tr>
 
-                    <tr>
-                      <td>
-                        Active 1M pop:
+                      <tr>
+                        <td>
+                          Active 1M pop:
                       </td>
-                      <td>
-                        {response1[0].cases["1M_pop"]}
+                        <td>
+                          {response1[0].cases["1M_pop"]}
+                        </td>
+                        <td>
+                          {response2[0].cases["1M_pop"]}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Tests 1M pop:
                       </td>
-                      <td>
-                        {response2[0].cases["1M_pop"]}
+                        <td>
+                          {response1[0].tests["1M_pop"]}
+                        </td>
+                        <td>
+                          {response2[0].tests["1M_pop"]}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Deaths 1M pop:
                       </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Tests 1M pop:
-                      </td>
-                      <td>
-                        {response1[0].tests["1M_pop"]}
-                      </td>
-                      <td>
-                        {response2[0].tests["1M_pop"]}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Deaths 1M pop:
-                      </td>
-                      <td>
-                        {response1[0].deaths["1M_pop"]}
-                      </td>
-                      <td>
-                        {response2[0].deaths["1M_pop"]}
-                      </td>
-                    </tr>
+                        <td>
+                          {response1[0].deaths["1M_pop"]}
+                        </td>
+                        <td>
+                          {response2[0].deaths["1M_pop"]}
+                        </td>
+                      </tr>
 
-
+                    </tbody>
                   </table>
                 </>
                 : <><h2>Please select your location and a destination country</h2></>}

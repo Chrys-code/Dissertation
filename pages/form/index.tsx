@@ -6,7 +6,6 @@ import Nav from "../components/navbar"
 import Button from "../components/button"
 import Dropdown from "../components/dropdown"
 import InputField from "../components/inputfield"
-import PresPad from "../components/prespad"
 import { parseCookies } from "../../lib/parseCookie"
 import { useRouter } from 'next/router'
 
@@ -17,12 +16,8 @@ const Form: FC<Props> = ({ userData }) => {
 
     // User data
     const [inputData, setInputData] = useState<object>({})
-    const [user, setUser] = useState({})
-
-    useEffect(() => {
-        setUser(userData)
-    }, [userData])
-
+    // Feedback
+    const [buttonLabel, setButtonLabel] = useState<string>("Save")
 
     // User Data update dynamically listening onChange
     const handleInput = (e) => {
@@ -35,13 +30,21 @@ const Form: FC<Props> = ({ userData }) => {
         e.preventDefault();
         const data = await fetch(`http://localhost:3000/api/form`, {
             method: "POST",
-            body: JSON.stringify({ ...inputData, userId: "606d7ecb8d8d77746cd1c796" }),
+            body: JSON.stringify({ ...inputData, userId: document.cookie }),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         })
-        const response = data.json()
+        const response = await data.json()
+
+        if (response) {
+            setButtonLabel(`${response.message}`)
+
+            setTimeout(() => {
+                setButtonLabel("Save")
+            }, 2000)
+        }
     }
 
     // "Please login here" when try to access the app without session
@@ -49,7 +52,7 @@ const Form: FC<Props> = ({ userData }) => {
         router.push('/signin')
     }
 
-    if (!user || !userData.user) {
+    if (!userData && !userData.user) {
         return (<>
             <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
         </>)
@@ -84,7 +87,7 @@ const Form: FC<Props> = ({ userData }) => {
                                 No:  <input type="radio" name="children" value="false" onChange={handleInput} />
                             </div>
                         </div>
-                        <Button className={style.btn} content={"Save"} />
+                        <Button className={style.btn} content={buttonLabel} />
                     </form>
                 </div>
             </>
