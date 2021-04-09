@@ -1,17 +1,26 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import Head from 'next/head';
+import { useRouter } from 'next/router'
 import style from "../../styles/signin_style.module.scss";
 import Button from "../components/button"
 import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
+import cookie from "js-cookie"
 
 interface Props { }
 
 const Signup: FC<Props> = ({ }) => {
+    const router = useRouter()
 
     // User data
     const [inputData, setInputData] = useState<object>({})
+    const [token, setToken] = useState<string>("")
+
+    // Set session cookie
+    useEffect(() => {
+        cookie.set("token", token)
+    }, [token])
 
     // User Data update dynamically listening onChange
     const handleInput = (e) => {
@@ -31,8 +40,14 @@ const Signup: FC<Props> = ({ }) => {
                 'Accept': 'application/json'
             }
         })
-        console.log(data)
+        const response = await data.json()
+
+        if (response && response.success == true && response.token) {
+            setToken(response.token);
+            router.push('/')
+        }
     }
+
 
 
     return (
