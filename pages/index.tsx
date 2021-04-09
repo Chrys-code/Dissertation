@@ -1,94 +1,155 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from "next/link";
-import { covidData } from "../lib/coviddata";
+import { fetchCovidData } from "../lib/coviddata";
 import style from "../styles/index_style.module.scss";
 import Nav from "./components/navbar";
 import Dropdown from "./components/dropdown";
 import PresPad from "./components/prespad";
 import { parseCookies } from "../lib/parseCookie";
+import { useRouter } from 'next/router'
 
 interface Props {
-  covidProps: Array<String>,
+  covidData: Array<any>,
   userData: any,
 }
 
-const Home: FC<Props> = ({ userData }: Props) => {
+const Home: FC<Props> = ({ userData, covidData }: Props) => {
+  const router = useRouter()
 
-  const [data, setData] = useState([])
+  // State
+  const [response1, setResponse1] = useState([])
+  const [response2, setResponse2] = useState([])
 
-  if (userData) {
-    console.log(userData)
+  // Filter API data for user
+  const handleInput1 = (e) => {
+    const filtered = covidData.filter((x) => x.country == e.target.value)
+    setResponse1(filtered)
+    console.log(response1)
   }
-  return (
-    <>
-      <div className={style.navbar}>
-        <Nav userData={userData} />
-        <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
-          <h1>Profile</h1>
 
-          <h2>Name:</h2>
-          <p>Sample</p>
+  // Filter API data for user
+  const handleInput2 = (e) => {
+    const filtered = covidData.filter((x) => x.country == e.target.value)
+    setResponse2(filtered)
+    console.log(filtered)
+  }
 
-          <h2>With children:</h2>
-          <p>Sample</p>
 
-          <h2>Departure location:</h2>
-          <p>Sample</p>
+  // "Please login here" when try to access the app without session
+  const handleClick = (e) => {
+    router.push('/signin')
+  }
 
-          <h2>Departure time:</h2>
-          <p>Sample</p>
-
-          <h2>Arrival location:</h2>
-          <p>Sample</p>
-
-          <h2>Arrival time:</h2>
-          <p>Sample</p>
-
-          <h2>Transport name, number:</h2>
-          <p>Sample</p>
-
-          <PresPad className={style.prespad} imageSrc="/images/qr.svg" alt="qr_code_smaple" head="" text="" />
-        </PresPad>
-      </div>
-
-      <div className={style.container}>
-
-        <div className={style.diagram}>
-          <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
-            <Dropdown className={style} values={["Country", "123"]} name="" />
-            <p>We should have an integrated Python plotlib diagram here</p>
-          </PresPad>
+  if (!userData.user) {
+    return (<>
+      <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
+    </>)
+  } else {
+    return (
+      <>
+        <div className={style.navbar}>
+          <Nav userData={userData} />
         </div>
-        <Link href="/form" >
-          <a><PresPad className={style.prespad} imageSrc="/images/locator.svg" alt="green_backgroun_img" head="Locator From" text="Fill a form that is required to cross country border" /></a>
-        </Link>
-        <Link href="/links" >
-          <a><PresPad className={style.prespad} imageSrc="/images/links.svg" alt="blue_backgroun_img" head="Informations" text="See a list of useful links, or collect yourself" /></a>
-        </Link>
+        <div className={style.container}>
+          <div className={style.diagram}>
+            <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
+              <div className={style.inlineContainer}>
+                <Dropdown className={style} values={covidData.map(item => { return item.country }).sort(function (a, b) { return a.localeCompare(b); })} name="" handleInput={handleInput1} />
+                <Dropdown className={style} values={covidData.map(item => { return item.country }).sort(function (a, b) { return a.localeCompare(b); })} name="" handleInput={handleInput2} />
+              </div>
+              {response1.length == 1 && response2.length == 1 ?
+                <>
+                  <table>
+                    <tr>
+                      <th>Results</th>
+                      <th>{response1[0].country}</th>
+                      <th>{response2[0].country}</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        Active cases:
+                      </td>
+                      <td>
+                        {response1[0].cases.active}
+                      </td>
+                      <td>
+                        {response2[0].cases.active}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        New cases:
+                      </td>
+                      <td>
+                        {response1[0].cases.new}
+                      </td>
+                      <td>
+                        {response2[0].cases.new}
+                      </td>
+                    </tr>
 
-      </div>
+                    <tr>
+                      <td>
+                        Active 1M pop:
+                      </td>
+                      <td>
+                        {response1[0].cases["1M_pop"]}
+                      </td>
+                      <td>
+                        {response2[0].cases["1M_pop"]}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Tests 1M pop:
+                      </td>
+                      <td>
+                        {response1[0].tests["1M_pop"]}
+                      </td>
+                      <td>
+                        {response2[0].tests["1M_pop"]}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Deaths 1M pop:
+                      </td>
+                      <td>
+                        {response1[0].deaths["1M_pop"]}
+                      </td>
+                      <td>
+                        {response2[0].deaths["1M_pop"]}
+                      </td>
+                    </tr>
 
-    </>
-  )
+
+                  </table>
+                </>
+                : <><h2>Please select your location and a destination country</h2></>}
+            </PresPad>
+          </div>
+          <Link href="/form" >
+            <a><PresPad className={style.prespad} imageSrc="/images/locator.svg" alt="green_backgroun_img" head="Locator From" text="Fill a form that is required to cross country border" /></a>
+          </Link>
+          <Link href="/links" >
+            <a><PresPad className={style.prespad} imageSrc="/images/links.svg" alt="blue_backgroun_img" head="Informations" text="See a list of useful links, or collect yourself" /></a>
+          </Link>
+
+        </div>
+      </>
+    )
+
+  }
 }
+
 
 export default Home
 
-/*
-export const getServerSideProps: GetServerSideProps = async context => {
-  const data = await covidData()
-  return { props: { covidProps: data } }
-}
-
-        <div>
-          {data.map((data, index) => { return (<p key={index}>{data.country}</p>) })}
-        </div>
-
-*/
-
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  // Get cookie and verify user session
+  // cookie token = sessionID in DB
   const cookies = parseCookies(req)
   const data = await fetch('http://localhost:3000/api/verify', {
     method: 'POST',
@@ -99,5 +160,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     body: JSON.stringify(cookies)
   })
   const res = await data.json();
-  return { props: { userData: res || null } }
+  // Get covid data from API
+  const covid = await fetchCovidData()
+  return { props: { userData: res || null, covidData: covid || null } }
 }

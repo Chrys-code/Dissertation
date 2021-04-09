@@ -9,29 +9,6 @@
     position: fixed;
     width: 100%;
     z-index: 100;
-    // Profile
-    @include prespad(100vh, 100vw){
-        .prespad {
-            position: absolute;
-            overflow-y:auto; 
-            background: $background;
-            padding: 0px 30px 0px 30px;
-            margin: 0;
-            transform: translateX(105%);
-            transition: 0.4s ease-in-out;
-            z-index: -1;
-            h1{
-                text-align: center
-            }
-            // QR code pres pad
-            @include prespad(300px, 300px){
-                .prespad {
-                    margin: auto;
-                    margin-bottom: 100px;
-                }
-            }
-        }
-    };
 }
 
 // Page content container
@@ -62,6 +39,29 @@
            @include dropdown;
         }
     }
+
+    .inlineContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        padding-top: 15px;
+        width: 100%;
+      }
+      
+      td, th {
+        text-align: left;
+        padding: 8px;
+      }
+
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
 
     // Presentation Pad for other pages in the app (link)
     @include prespad(150px, 345px) {

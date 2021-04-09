@@ -16,6 +16,7 @@ const Signin: FC<Props> = ({ }) => {
     const [inputData, setInputData] = useState<object>({})
     const [token, setToken] = useState<string>("")
 
+    // Set session cookie
     useEffect(() => {
         cookie.set("token", token)
     }, [token])
