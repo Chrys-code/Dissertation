@@ -12,9 +12,8 @@ const UserSession = require('../models/usersession');
 //////////////////////
 router.post("/signin", (req, res) => {
 
-    const { body, session } = req;
+    const { body } = req;
     const { email, password } = body;
-
     // Check if all data is supplied by the user
     // Create feedback
     if (!email) {
@@ -70,14 +69,9 @@ router.post("/signin", (req, res) => {
                     });
                 }
 
-                // Save new document id (from DataBase/session) to express session sessionId
-                // Save user ID from database to session for operational tasks in the app
-                session.sessionId = doc._id;
-                session.user = user;
-                // Sending the data back is not necessary and exposes sensitive data
-                // Sending feedback is not necessary as user is automatically redirected
                 return res.status(200).send({
                     success: true,
+                    token: doc._id
                 })
             });
         }

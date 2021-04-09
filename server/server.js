@@ -5,7 +5,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 require("dotenv/config");
 
 //////////////////////
@@ -15,47 +14,13 @@ require("dotenv/config");
 const signout = require('./auth/signout');
 const signin = require('./auth/signin');
 const signup = require('./auth/signup');
-const verify = require('./auth/session');
+const verify = require('./auth/verify');
 // App Event
 const profiledata = require('./appevents/profiledata');
 const linkdata = require('./appevents/linkdata');
 // UserEvent
 const formupdate = require('./userevents/formupdate');
-const linkupdate = require('./userevents/linkupdate')
-
-
-//////////////////////
-// APP
-//////////////////////
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-// app.use(express.urlencoded({ extended: false }));
-
-
-//////////////////////
-// ROUTES
-//////////////////////
-// Session
-app.use(session({
-    secret: 'key',
-    resave: false,
-    saveUninitialized: false,
-}))
-// Session Verification from Client side
-app.use("/api", verify);
-// Auth
-app.use("/api", signin);
-app.use("/api", signup);
-app.use("/api", signout);
-
-// App Events
-app.use("/api", profiledata);
-app.use("/api", linkdata);
-// User Events
-app.use("/api", formupdate);
-app.use("/api", linkupdate);
-
+const linkupdate = require('./userevents/linkupdate');
 
 //////////////////////
 // CONNECT TO DATABASE
@@ -71,6 +36,33 @@ mongoose.connection.on('open', () => {
     console.log('Connected to Database')
 });
 
+
+//////////////////////
+// APP
+//////////////////////
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+
+
+//////////////////////
+// ROUTES
+//////////////////////
+// Session Verification from Client side
+app.use("/api", verify);
+// Auth
+app.use("/api", signin);
+app.use("/api", signup);
+app.use("/api", signout);
+
+// App Events
+app.use("/api", profiledata);
+app.use("/api", linkdata);
+// User Events
+app.use("/api", formupdate);
+app.use("/api", linkupdate);
+
 /*
 // heroku
 if (process.env.NODE_ENV === "production") {
@@ -84,6 +76,5 @@ if (process.env.NODE_ENV === "production") {
 // RUN PORT 8080
 //////////////////////
 const PORT = process.env.PORT || 8080;
-console.log(`app listen to: ${PORT}`)
 app.listen(PORT)
 

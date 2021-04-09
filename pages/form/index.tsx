@@ -1,14 +1,16 @@
 import React, { FC, useState } from "react"
 import Head from 'next/head'
+import { GetServerSideProps } from 'next';
 import style from "../../styles/form_style.module.scss"
 import Nav from "../components/navbar"
 import Button from "../components/button"
 import Dropdown from "../components/dropdown"
 import InputField from "../components/inputfield"
+import { parseCookies } from "../../lib/parseCookie"
 
-interface Props { }
+interface Props { userData: any }
 
-const Form: FC<Props> = ({ }) => {
+const Form: FC<Props> = ({ userData }) => {
 
     // User data
     const [inputData, setInputData] = useState<object>({})
@@ -17,7 +19,6 @@ const Form: FC<Props> = ({ }) => {
     const handleInput = (e) => {
         const { value, name } = e.target;
         setInputData({ ...inputData, [name]: value })
-        console.log(inputData)
     }
 
     // Handling form submit: request user registration
@@ -32,13 +33,12 @@ const Form: FC<Props> = ({ }) => {
             }
         })
         const response = data.json()
-        console.log(response)
     }
 
     return (
         <>
             <div className={style.navbar}>
-                <Nav />
+                <Nav userData={userData} />
             </div>
             <div className={style.container}>
                 <form onSubmit={handleSubmit}>
@@ -73,3 +73,21 @@ const Form: FC<Props> = ({ }) => {
 }
 
 export default Form
+
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+    // Get local session token
+    const cookies = parseCookies(req)
+    // Fetch session and user
+    const data = await fetch('http://localhost:3000/api/verify', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(cookies)
+    })
+
+    const res = await data.json();
+    return { props: { userData: res || null } }
+}
