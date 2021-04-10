@@ -12,7 +12,11 @@ interface Props {
     name: string,
 }
 
-const InputField: FC<Props> = ({ classNames, labelFor, labelContent, name, placeholder, type, prefixImgSrc, handleInput }) => {
+const InputField: FC<Props> = ({
+    classNames, labelFor, labelContent,
+    name, placeholder, type, prefixImgSrc,
+    handleInput
+}) => {
 
     return (
         <div className={classNames.input_field}>

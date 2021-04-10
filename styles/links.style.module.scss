@@ -1,6 +1,6 @@
 @import "./lib/components/button.module.scss";
 @import "./lib/components/link.module.scss";
-@import "./lib/components/prespad.module.scss";
+@import "./lib/components/inputfield.module.scss";
 @import "./lib/palette.scss";
 
 .navbar {
@@ -23,5 +23,11 @@
             margin: 0px 5px 0px 5px;
         }
     };
+    form {
+        .form_content_animation {
+            padding-top: 15px;
+            @include input_field;
+        }   
+    }
     @include button;
 }
