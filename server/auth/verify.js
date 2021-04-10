@@ -57,6 +57,7 @@ router.post("/verify", (req, res) => {
                         lastname: user.lastname,
                         departure: user.departure,
                         arrival: user.arrival,
+                        children: user.children,
                         transport: user.transport,
                         links: user.links
                     }

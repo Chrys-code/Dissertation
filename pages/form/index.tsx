@@ -63,6 +63,7 @@ const Form: FC<Props> = ({ userData }) => {
                     <Nav userData={userData} />
                 </div>
                 <div className={style.container}>
+                    <h2>Please provide information about your travel from departure to arrival location</h2>
                     <form onSubmit={handleSubmit}>
                         <InputField classNames={style} labelFor="transport" labelContent="Transport name, number:" name="transport" placeholder="Transport" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />
                         <InputField classNames={style} labelFor="departure" labelContent="Departure location & time:" name="departure" placeholder="Departure location" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />

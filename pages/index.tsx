@@ -125,7 +125,7 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
                     </tbody>
                   </table>
                 </>
-                : <><h2>Please select your location and a destination country</h2></>}
+                : <><h2>Please select countries to compare</h2></>}
             </PresPad>
           </div>
           <Link href="/form" >

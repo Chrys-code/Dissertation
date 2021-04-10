@@ -64,7 +64,7 @@ const Nav: FC<Props> = ({ userData }) => {
                     <p>{userData && `${userData.user.firstname} ${userData.user.lastname}`}</p>
 
                     <h2>With children:</h2>
-                    <p>{userData && userData.user.children}</p>
+                    <p>{userData && userData.user.children ? "Yes" : "No"}</p>
 
                     <h2>Departure:</h2>
                     <p>{userData && userData.user.departure.location}, {userData && userData.user.departure.time}</p>
@@ -73,7 +73,7 @@ const Nav: FC<Props> = ({ userData }) => {
                     <p>{userData && userData.user.arrival.location}, {userData && userData.user.arrival.time}</p>
 
                     <h2>Transport name, number:</h2>
-                    <p>{userData && userData.user.Transport}</p>
+                    <p>{userData && `${userData.user.transport}`}</p>
 
                     <PresPad className={style.prespad} imageSrc="/images/qr.svg" alt="qr_code_smaple" head="" text="" />
                 </PresPad>
