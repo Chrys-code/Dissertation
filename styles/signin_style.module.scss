@@ -2,6 +2,7 @@
 @import "./lib/components/button.module.scss";
 @import "./lib/components/prespad.module.scss";
 @import "./lib/palette.scss";
+@import "./lib/media.scss";
 
 .container {
     position: relative;
@@ -19,6 +20,10 @@
         @include input_field;
         // Sign In button
         @include button($shadowDark: $Green);
+
+        @include sm {
+            width: 300px;
+        }
     }
     .link {
         color: $ColorError

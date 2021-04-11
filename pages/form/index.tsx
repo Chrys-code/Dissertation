@@ -6,8 +6,10 @@ import Nav from "../components/navbar"
 import Button from "../components/button"
 import Dropdown from "../components/dropdown"
 import InputField from "../components/inputfield"
+import PresPad from "../components/prespad"
 import { parseCookies } from "../../lib/parseCookie"
 import { useRouter } from 'next/router'
+
 
 interface Props { userData: any }
 
@@ -63,8 +65,11 @@ const Form: FC<Props> = ({ userData }) => {
                     <Nav userData={userData} />
                 </div>
                 <div className={style.container}>
-                    <h2>Please provide information about your travel from departure to arrival location</h2>
                     <form onSubmit={handleSubmit}>
+                        <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
+                            <h2>Please provide information about your travel</h2>
+                        </PresPad>
+
                         <InputField classNames={style} labelFor="transport" labelContent="Transport name, number:" name="transport" placeholder="Transport" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />
                         <InputField classNames={style} labelFor="departure" labelContent="Departure location & time:" name="departure" placeholder="Departure location" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />
                         <div className={style.inline_container}>
