@@ -1,12 +1,12 @@
-import React, { FC, useState, useEffect } from "react";
-import { GetServerSideProps } from 'next';
-import Head from 'next/head';
-import Link from "next/link";
-import { fetchCovidData } from "../lib/coviddata";
-import style from "../styles/index_style.module.scss";
-import Nav from "./components/navbar";
-import Dropdown from "./components/dropdown";
-import PresPad from "./components/prespad";
+import React, { FC, useState } from "react"
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import Link from "next/link"
+import { fetchCovidData } from "../lib/coviddata"
+import style from "../styles/index_style.module.scss"
+import Nav from "./components/navbar"
+import Dropdown from "./components/dropdown"
+import PresPad from "./components/prespad"
 import { useRouter } from 'next/router'
 
 interface Props {
@@ -86,7 +86,6 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
                           {response2[0].cases.new}
                         </td>
                       </tr>
-
                       <tr>
                         <td>
                           Active 1M pop:
@@ -120,7 +119,6 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
                           {response2[0].deaths["1M_pop"]}
                         </td>
                       </tr>
-
                     </tbody>
                   </table>
                 </>
@@ -133,7 +131,6 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
           <Link href="/links" >
             <a><PresPad className={style.prespad} imageSrc="/images/links.svg" alt="blue_backgroun_img" head="Informations" text="See a list of useful links, or collect yourself" /></a>
           </Link>
-
         </div>
       </>
     )
@@ -145,7 +142,7 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const data = await fetch('http://localhost:3000/api/verify', {
+  const data = await fetch(process.env.PROD === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

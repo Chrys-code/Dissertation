@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require("express-session")
-require("dotenv/config");
+require("dotenv").config({ path: '../keys.env' });
 
 //////////////////////
 // MODULES
@@ -26,7 +26,7 @@ const linkupdate = require('./userevents/linkupdate');
 //////////////////////
 // CONNECT TO DATABASE
 //////////////////////
-mongoose.connect(process.env.DB_KEY || "mongodb+srv://Lancer:R94619422n@cluster0.jzzub.mongodb.net/Dissproject?retryWrites=true&w=majority", {
+mongoose.connect(process.env.DB_KEY, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -74,18 +74,14 @@ app.use("/api", linkdata);
 app.use("/api", formupdate);
 app.use("/api", linkupdate);
 
-/*
+
 // heroku
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("../client/build"));
+if (process.env.PROD === "production") {
+    app.use(express.static("cli/url/here"));
 }
-*
-* This is for REACT not Next !!!
-*/
 
 //////////////////////
 // RUN PORT 8080
 //////////////////////
 const PORT = process.env.PORT || 8080;
 app.listen(PORT)
-

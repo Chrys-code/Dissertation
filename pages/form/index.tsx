@@ -29,7 +29,7 @@ const Form: FC<Props> = ({ userData }) => {
     // Handling form submit: request user registration
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await fetch(`http://localhost:3000/api/form`, {
+        const data = await fetch(process.env.PROD === "production" ? process.env.FORM : 'http://localhost:3000/api/form', {
             method: "POST",
             body: JSON.stringify(inputData),
             headers: {
@@ -105,7 +105,7 @@ export default Form
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     // Fetch session and user
-    const data = await fetch('http://localhost:3000/api/verify', {
+    const data = await fetch(process.env.PROD === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

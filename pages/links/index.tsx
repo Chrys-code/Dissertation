@@ -39,7 +39,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
     if (formState && Object.keys(formState).length === 0 && formState.constructor === Object) return setAddOpen(!addOpen)
 
     // If formState not empty: request to server to save new item
-    const data = await fetch("http://localhost:3000/api/links", {
+    const data = await fetch(process.env.PROD === "production" ? process.env.LINKS : 'http://localhost:3000/api/links', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ export default Links
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   // Fetch session and user
-  const data = await fetch('http://localhost:3000/api/verify', {
+  const data = await fetch(process.env.PROD === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

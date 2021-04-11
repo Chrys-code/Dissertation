@@ -1,3 +1,4 @@
+/*
 import { ApolloServer, gql } from 'apollo-server-micro'
 import { makeExecutableSchema } from 'graphql-tools'
 import { MongoClient } from 'mongodb'
@@ -75,5 +76,5 @@ export const config = {
 }
 
 export default apolloServer.createHandler({ path: '/api/graphql' })
-
+*/
 
