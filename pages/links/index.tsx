@@ -36,10 +36,10 @@ const Links: FC<Props> = ({ userData }: Props) => {
   // Add new item
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // User should at least touch the form to operate
+    // User should at least write in the form, otherwise keep it togglable
     if (formState && Object.keys(formState).length === 0 && formState.constructor === Object) return setAddOpen(!addOpen)
 
-    // request to server to save new item
+    // If formState not empty: request to server to save new item
     const data = await fetch("http://localhost:3000/api/links", {
       method: "POST",
       headers: {
@@ -50,17 +50,22 @@ const Links: FC<Props> = ({ userData }: Props) => {
     })
 
     const res = await data.json();
-    console.log(res)
 
+    // If the response is failure: display feedback on button
     if (res && res.success == false) {
       setButtonLabel(`${res.message}`)
       setTimeout(() => {
         setButtonLabel(`Add`)
       }, 2000)
+      return
     }
 
+    // If the response is success: 
+    // Save new variable to update local UI
+    // Display feedback on button
+    // Set button label back, close menu 
     if (res && res.success == true) {
-      //userData.user.links.push(formState)
+      userData.user.links.push(formState)
       setFormState({})
       setButtonLabel(`${res.message}`)
       setTimeout(() => {
@@ -76,6 +81,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
     router.push('/signin')
   }
 
+  // Conditional rendering if session is not set
   if (!userData && !userData.user) {
     return (<>
       <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
@@ -87,12 +93,13 @@ const Links: FC<Props> = ({ userData }: Props) => {
           <Nav userData={userData} />
         </div>
         <div className={style.container}>
+          <Link className={style} link="https://www.gov.uk/uk-border-control" head="GOV UK" text="Border Control Information" imgSrc="/images/globe.svg" alt="globe.svg" />
           {userData.user.links.map((item, index) => {
             return (
               <Link key={index} className={style} link={item.link} head={item.head} text={item.text} imgSrc="/images/globe.svg" alt="globe.svg" />
             )
-          })}
-          <Link className={style} link="https://www.gov.uk/uk-border-control" head="GOV UK" text="Border Control Information" imgSrc="/images/globe.svg" alt="globe.svg" />
+          })
+          }
           <form onSubmit={handleSubmit}>
             <motion.div className={style.form_content_animation} initial={{ height: "0px", opacity: .0, display: "none" }} animate={{ height: addOpen ? "250px" : "0%", opacity: addOpen ? "1" : "0", display: addOpen ? "block" : "none" }} transition={{ type: "spring", duration: .5 }}  >
               <h2>Add new item:</h2>
