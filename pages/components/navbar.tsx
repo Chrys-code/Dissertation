@@ -56,7 +56,7 @@ const Nav: FC<Props> = ({ userData }) => {
                     <img src="/images/avatar.svg" alt="avatar" />
                 </button>
             </div>
-            <motion.div className={style.profile_animation_container} initial={{ transform: "translateX(105%)" }} animate={{ transform: profileOpen ? "translateX(0%)" : "translateX(105%)" }}>
+            <motion.div className={style.profile_animation_container} initial={{ transform: "translateX(105%)" }} animate={{ transform: profileOpen ? "translateX(78%)" : "translateX(105%)" }} transition={{ type: "spring", duration: .5 }}>
                 <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
                     <h1>Profile</h1>
 

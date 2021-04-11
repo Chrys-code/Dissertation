@@ -76,8 +76,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
     router.push('/signin')
   }
 
-
-  if (!userData || !userData.user) {
+  if (!userData && !userData.user) {
     return (<>
       <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
     </>)
@@ -95,11 +94,11 @@ const Links: FC<Props> = ({ userData }: Props) => {
           })}
           <Link className={style} link="https://www.gov.uk/uk-border-control" head="GOV UK" text="Border Control Information" imgSrc="/images/globe.svg" alt="globe.svg" />
           <form onSubmit={handleSubmit}>
-            <motion.div className={style.form_content_animation} initial={{ height: "0px", opacity: .0, display: "none" }} animate={{ height: addOpen ? "250px" : "0%", opacity: addOpen ? "1" : "0", display: addOpen ? "block" : "none" }}  >
+            <motion.div className={style.form_content_animation} initial={{ height: "0px", opacity: .0, display: "none" }} animate={{ height: addOpen ? "250px" : "0%", opacity: addOpen ? "1" : "0", display: addOpen ? "block" : "none" }} transition={{ type: "spring", duration: .5 }}  >
               <h2>Add new item:</h2>
-              <InputField classNames={style} name="link" placeholder="Website URL" type="text" prefixImgSrc="/images/prefix_globe.svg" handleInput={handleInput} />
-              <InputField classNames={style} name="head" placeholder="Title" type="text" prefixImgSrc="/images/prefix_globe.svg" handleInput={handleInput} />
-              <InputField classNames={style} name="text" placeholder="Short description" type="text" prefixImgSrc="/images/prefix_globe.svg" handleInput={handleInput} />
+              <InputField classNames={style} labelFor="" labelContent="" name="link" placeholder="Website URL" type="text" prefixImgSrc="/images/prefix_globe.svg" handleInput={handleInput} />
+              <InputField classNames={style} labelFor="" labelContent="" name="head" placeholder="Title" type="text" prefixImgSrc="/images/prefix_globe.svg" handleInput={handleInput} />
+              <InputField classNames={style} labelFor="" labelContent="" name="text" placeholder="Short description" type="text" prefixImgSrc="/images/prefix_globe.svg" handleInput={handleInput} />
             </motion.div>
             {!addOpen ?
               <div onClick={addHandleClick}>

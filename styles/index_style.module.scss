@@ -3,6 +3,7 @@
 @import "./lib/components/dropdown.module.scss";
 @import "./lib/fontslib.scss";
 @import "./lib/palette.scss";
+@import "./lib/media.scss";
 
 // Navigation header
 .navbar {
@@ -15,14 +16,16 @@
 .container {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1,1fr);
     text-align: center;
     width: 100%;
     padding: 68px 15px 15px 15px;
     min-height: 100vh;
     overflow-x: hidden;
     // Presentation Pad for Python plotlib diagram
+
     .diagram {
+        margin: auto;
         @include prespad(300px, 345px) {
             .prespad {
                 display: flex;
@@ -37,34 +40,31 @@
                 @include mobile_primary($General, 400)
             }
            @include dropdown;
+            .inlineContainer {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+            table {
+                font-family: arial, sans-serif;
+                padding-top: 15px;
+                width: 100%;
+              }
+              td, th {
+                text-align: left;
+                padding: 8px;
+              }
+              tr:nth-child(even) {
+                background-color: #dddddd;
+              }
         }
     }
 
-    .inlineContainer {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    table {
-        font-family: arial, sans-serif;
-        padding-top: 15px;
-        width: 100%;
-      }
-      
-      td, th {
-        text-align: left;
-        padding: 8px;
-      }
-
-      
-      tr:nth-child(even) {
-        background-color: #dddddd;
-      }
-
-    // Presentation Pad for other pages in the app (link)
     @include prespad(150px, 345px) {
+        .prespad {
+            margin: 10px auto 10px auto;
+        }
         h2 {
             @include mobile_h2($White)
         }
@@ -72,4 +72,52 @@
             @include mobile_primary($White, 400)
         }
     };
+
+    ///////////////////
+    // Media SM
+    ///////////////////
+
+    @include sm {
+        display: block;
+        .diagram {
+            margin: 25px auto 25px auto;
+            @include prespad(400px, 515px) {
+                .prespad {
+                    margin: 25px auto 25px auto;
+                }
+            }
+            table {
+                padding-top: 50px;
+              }
+        }
+    
+        a {
+            display: inline-block;
+            margin: 15px 15px 15px 15px;
+        } 
+        @include prespad(108px, 250px){
+            img {
+                width: 100%;
+            }
+        };
+    }
+
+    ///////////////////
+    // Media MD
+    ///////////////////
+
+    @include md {
+        display: block;
+        .diagram {
+            margin: 25px auto 25px auto;
+            @include prespad(500px, 900px) {
+                .prespad {
+                    margin: 25px auto 25px auto;
+                }
+            }
+        }
+            @include prespad(150px, 345px);
+    }
+
 }
+
