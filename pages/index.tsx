@@ -7,7 +7,6 @@ import style from "../styles/index_style.module.scss";
 import Nav from "./components/navbar";
 import Dropdown from "./components/dropdown";
 import PresPad from "./components/prespad";
-import { parseCookies } from "../lib/parseCookie";
 import { useRouter } from 'next/router'
 
 interface Props {
@@ -146,16 +145,12 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  // Get cookie and verify user session
-  // cookie token = sessionID in DB
-  const cookies = parseCookies(req)
   const data = await fetch('http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-    body: JSON.stringify(cookies)
   })
   const res = await data.json();
   // Get covid data from API

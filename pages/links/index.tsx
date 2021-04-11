@@ -6,7 +6,6 @@ import Link from "../components/link"
 import Button from "../components/button"
 import InputField from "../components/inputfield"
 import { GetServerSideProps } from 'next'
-import { parseCookies } from "../../lib/parseCookie"
 import { useRouter } from 'next/router'
 import { motion } from "framer-motion"
 
@@ -46,7 +45,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ ...formState, token: document.cookie })
+      body: JSON.stringify(formState)
     })
 
     const res = await data.json();
@@ -124,18 +123,14 @@ export default Links
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  // Get local session token
-  const cookies = parseCookies(req)
   // Fetch session and user
   const data = await fetch('http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-    },
-    body: JSON.stringify(cookies)
+    }
   })
-
   const res = await data.json();
   return { props: { userData: res || null } }
 }

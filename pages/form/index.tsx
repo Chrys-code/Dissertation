@@ -7,7 +7,6 @@ import Button from "../components/button"
 import Dropdown from "../components/dropdown"
 import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
-import { parseCookies } from "../../lib/parseCookie"
 import { useRouter } from 'next/router'
 
 
@@ -32,7 +31,7 @@ const Form: FC<Props> = ({ userData }) => {
         e.preventDefault();
         const data = await fetch(`http://localhost:3000/api/form`, {
             method: "POST",
-            body: JSON.stringify({ ...inputData, userId: document.cookie }),
+            body: JSON.stringify(inputData),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -105,16 +104,13 @@ export default Form
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-    // Get local session token
-    const cookies = parseCookies(req)
     // Fetch session and user
     const data = await fetch('http://localhost:3000/api/verify', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-        },
-        body: JSON.stringify(cookies)
+        }
     })
 
     const res = await data.json();

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import style from "../../styles/navbar.module.scss"
 import PresPad from "../components/prespad"
 import { useRouter } from 'next/router'
-import { motion, transform } from "framer-motion"
+import { motion } from "framer-motion"
 
 
 interface Props {
@@ -28,7 +28,6 @@ const Nav: FC<Props> = ({ userData }) => {
             if (router.route == "/") {
                 const data = await fetch(`http://localhost:3000/api/signout`, {
                     method: "POST",
-                    body: JSON.stringify({ token: document.cookie }),
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'

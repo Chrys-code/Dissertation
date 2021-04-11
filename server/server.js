@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const session = require("express-session")
 require("dotenv/config");
 
 //////////////////////
@@ -41,18 +42,28 @@ mongoose.connection.on('open', () => {
 // APP
 //////////////////////
 const app = express();
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: false,
+        maxAge: 60000
+    }
+}))
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
-
 //////////////////////
 // ROUTES
 //////////////////////
-// Session Verification from Client side
-app.use("/api", verify);
 // Auth
 app.use("/api", signin);
+
+// Session Verification from Client side
+app.use("/api", verify);
+
 app.use("/api", signup);
 app.use("/api", signout);
 

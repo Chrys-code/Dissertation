@@ -5,7 +5,6 @@ import style from "../../styles/signin_style.module.scss"
 import Button from "../components/button"
 import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
-import cookie from "js-cookie"
 
 interface Props { }
 
@@ -14,15 +13,8 @@ const Signin: FC<Props> = ({ }) => {
 
     // User data
     const [inputData, setInputData] = useState<object>({})
-    const [token, setToken] = useState<string>("")
     // Feedback
     const [buttonLabel, setButtonLabel] = useState<string>("Sign In")
-
-    // Set session cookie
-    useEffect(() => {
-        cookie.set("token", token)
-    }, [token])
-
 
     // User Data update dynamically listening onChange
     const handleInput = (e) => {
@@ -33,7 +25,7 @@ const Signin: FC<Props> = ({ }) => {
     // Handling form submit: request user registration
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // unfortunately axios has XHR and http problems here
+        // unfortunately axios had XHR and http problems here
         const data = await fetch(`http://localhost:3000/api/signin`, {
             method: "POST",
             body: JSON.stringify(inputData),
@@ -52,8 +44,7 @@ const Signin: FC<Props> = ({ }) => {
             }, 2000)
         }
 
-        if (response && response.success == true && response.token) {
-            setToken(response.token);
+        if (response && response.success == true) {
             router.push('/')
         }
     }

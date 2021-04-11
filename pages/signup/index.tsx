@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import Link from "next/link";
 import Head from 'next/head';
 import { useRouter } from 'next/router'
@@ -6,7 +6,6 @@ import style from "../../styles/signin_style.module.scss";
 import Button from "../components/button"
 import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
-import cookie from "js-cookie"
 
 interface Props { }
 
@@ -15,14 +14,8 @@ const Signup: FC<Props> = ({ }) => {
 
     // User data
     const [inputData, setInputData] = useState<object>({})
-    const [token, setToken] = useState<string>("")
     // Feedback
     const [buttonLabel, setButtonLabel] = useState<string>("Sign Up")
-
-    // Set session cookie
-    useEffect(() => {
-        cookie.set("token", token)
-    }, [token])
 
     // User Data update dynamically listening onChange
     const handleInput = (e) => {
@@ -33,7 +26,7 @@ const Signup: FC<Props> = ({ }) => {
     // Handling form submit: request user registration
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // unfortunately axios has XHR and http problems here
+        // unfortunately axios had XHR and http problems here
         const data = await fetch("http://localhost:3000/api/signup", {
             method: "POST",
             body: JSON.stringify(inputData),
@@ -43,7 +36,6 @@ const Signup: FC<Props> = ({ }) => {
             }
         })
         const response = await data.json()
-
         if (response && response.success == false) {
             setButtonLabel(response.message)
 
@@ -52,13 +44,10 @@ const Signup: FC<Props> = ({ }) => {
             }, 2000)
         }
 
-        if (response && response.success == true && response.token) {
-            setToken(response.token);
+        if (response && response.success == true) {
             router.push('/')
         }
     }
-
-
 
     return (
         <div className={style.container}>
