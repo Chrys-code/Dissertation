@@ -76,11 +76,8 @@ const Links: FC<Props> = ({ userData }: Props) => {
     router.push('/signin')
   }
 
-  if (userData) {
-    console.log(userData)
-  }
 
-  if (!userData && !userData.user) {
+  if (!userData || !userData.user) {
     return (<>
       <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
     </>)

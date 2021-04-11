@@ -39,7 +39,7 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
     router.push('/signin')
   }
 
-  if (!userData.user) {
+  if (!userData || !userData.user) {
     return (<>
       <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
     </>)

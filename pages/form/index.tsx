@@ -52,7 +52,7 @@ const Form: FC<Props> = ({ userData }) => {
         router.push('/signin')
     }
 
-    if (!userData && !userData.user) {
+    if (!userData || !userData.user) {
         return (<>
             <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
         </>)
