@@ -3,12 +3,14 @@ import Document, { Head, Main, NextScript, Html, DocumentContext } from 'next/do
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html>
+            <Html lang="en">
                 <Head>
+                    <link rel="manifest" href="/manifest.json" />
+                    <meta name="theme-color" content="#F3F3F4" />
                 </Head>
                 < body >
                     <Main />
-                    < NextScript />
+                    <NextScript />
                 </body>
             </Html>
         )

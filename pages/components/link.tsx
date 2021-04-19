@@ -12,20 +12,23 @@ interface Props {
 
 const Dropdown: FC<Props> = ({ className, link, head, text, imgSrc, alt }) => {
 
-    return (
-        <Link href={link} passHref={true}>
-            <div className={className.link}>
-                <div className={className.icon}>
-                    <img src={imgSrc} alt={alt} />
+    if (!link) { return null }
+    else {
+        return (
+            <Link href={link} passHref={true}>
+                <div className={className?.link}>
+                    <div className={className?.icon}>
+                        <img src={imgSrc} alt={alt} />
+                    </div>
+                    <div>
+                        <h2>{head}</h2>
+                        <p>{text}</p>
+                    </div>
                 </div>
+            </Link>
+        )
+    }
 
-                <div>
-                    <h2>{head}</h2>
-                    <p>{text}</p>
-                </div>
-            </div>
-        </Link>
-    )
 }
 
 export default Dropdown

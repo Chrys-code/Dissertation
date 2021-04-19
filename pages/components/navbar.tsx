@@ -43,14 +43,16 @@ const Nav: FC<Props> = ({ userData }) => {
         }
     }
 
-    return (
+    if (!userData) return null
+
+    if (userData) return (
         <div className={style.container} >
             <button className={style.btn} type="submit" onClick={arrowBackHandleClick}>
                 {router.route == "/" ? "X" : "←"}
             </button>
 
             <div className={style.profile}>
-                <p id={style.profile_name} >{userData.user && userData.user.firstname}</p>
+                <p id={style.profile_name} >{userData.user.firstname}</p>
                 <button className={style.btn} type="submit" onClick={profileHandleClick}>
                     <img src="/images/avatar.svg" alt="avatar" />
                 </button>
@@ -60,13 +62,13 @@ const Nav: FC<Props> = ({ userData }) => {
                     <h1>Profile</h1>
 
                     <h2>Name:</h2>
-                    <p>{userData && `${userData.user.firstname} ${userData.user.lastname}`}</p>
+                    <p>{`${userData.user.firstname} ${userData.user.lastname}`}</p>
 
                     <h2>With children:</h2>
-                    <p>{userData && userData.user.children ? "Yes" : "No"}</p>
+                    <p>{userData.user.children ? "Yes" : "No"}</p>
 
                     <h2>Departure:</h2>
-                    <p>{userData && userData.user.departure.location}, {userData && userData.user.departure.time}</p>
+                    <p>{userData.user.departure.location}, {userData.user.departure.time}</p>
 
                     <h2>Arrival:</h2>
                     <p>{userData && userData.user.arrival.location}, {userData && userData.user.arrival.time}</p>

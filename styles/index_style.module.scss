@@ -39,6 +39,7 @@
             p {
                 @include mobile_primary($General, 400)
             }
+            
            @include dropdown;
             .inlineContainer {
                 display: flex;
