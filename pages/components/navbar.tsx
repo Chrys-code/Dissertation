@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useEffect } from "react"
 import Head from 'next/head'
 import style from "../../styles/navbar.module.scss"
 import PresPad from "../components/prespad"
@@ -14,17 +14,32 @@ const Nav: FC<Props> = ({ userData }) => {
     const router = useRouter()
     // Profile open/close state
     const [profileOpen, setProfileOpen] = useState(false);
+    const [route, setRoute] = useState("")
     // Profile state changer
     const profileHandleClick = (e) => {
         e.preventDefault();
         setProfileOpen(!profileOpen)
     }
+
+    // Page title generate based on route
+    useEffect(() => {
+        if (router.pathname == "/") {
+            setRoute("Home")
+        } else if (router.pathname == "/links") {
+            setRoute("Links")
+        } else if (router.pathname == "/form") {
+            setRoute("Form")
+        }
+    }, [router])
+
     // Back button / exit app behaviour
     const arrowBackHandleClick = async (e) => {
         e.preventDefault();
+        // If profile open, close profile tab
         if (profileOpen) {
             setProfileOpen(!profileOpen)
         } else {
+            // If route is home page, trigger session termination and exit
             if (router.route == "/") {
                 const data = await fetch(`http://localhost:3000/api/signout`, {
                     method: "POST",
@@ -38,49 +53,57 @@ const Nav: FC<Props> = ({ userData }) => {
                     router.push('/signin')
                 }
             } else {
+                // Else just step back to home page
                 router.push('/')
             }
         }
     }
 
-    if (!userData) return null
+    if (!userData) {
+        return null
+    } else {
+        return (
+            <>
+                <Head>
+                    <title>{route}</title>
+                </Head>
+                <div className={style.container} >
+                    <button className={style.btn} type="submit" onClick={arrowBackHandleClick}>
+                        {router.route == "/" ? "X" : "←"}
+                    </button>
 
-    if (userData) return (
-        <div className={style.container} >
-            <button className={style.btn} type="submit" onClick={arrowBackHandleClick}>
-                {router.route == "/" ? "X" : "←"}
-            </button>
+                    <div className={style.profile}>
+                        <p id={style.profile_name} >{userData.user.firstname}</p>
+                        <button className={style.btn} type="submit" onClick={profileHandleClick}>
+                            <img src="/images/avatar.svg" alt="avatar" />
+                        </button>
+                    </div>
+                    <motion.div className={style.profile_animation_container} initial={{ transform: "translateX(105%)" }} animate={{ transform: profileOpen ? "translateX(78%)" : "translateX(105%)" }} transition={{ type: "spring", duration: .5 }}>
+                        <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
+                            <h1>Profile</h1>
 
-            <div className={style.profile}>
-                <p id={style.profile_name} >{userData.user.firstname}</p>
-                <button className={style.btn} type="submit" onClick={profileHandleClick}>
-                    <img src="/images/avatar.svg" alt="avatar" />
-                </button>
-            </div>
-            <motion.div className={style.profile_animation_container} initial={{ transform: "translateX(105%)" }} animate={{ transform: profileOpen ? "translateX(78%)" : "translateX(105%)" }} transition={{ type: "spring", duration: .5 }}>
-                <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
-                    <h1>Profile</h1>
+                            <h2>Name:</h2>
+                            <p>{`${userData.user.firstname} ${userData.user.lastname}`}</p>
 
-                    <h2>Name:</h2>
-                    <p>{`${userData.user.firstname} ${userData.user.lastname}`}</p>
+                            <h2>With children:</h2>
+                            <p>{userData.user.children ? "Yes" : "No"}</p>
 
-                    <h2>With children:</h2>
-                    <p>{userData.user.children ? "Yes" : "No"}</p>
+                            <h2>Departure:</h2>
+                            <p>{userData.user.departure.location}, {userData.user.departure.time}</p>
 
-                    <h2>Departure:</h2>
-                    <p>{userData.user.departure.location}, {userData.user.departure.time}</p>
+                            <h2>Arrival:</h2>
+                            <p>{userData && userData.user.arrival.location}, {userData && userData.user.arrival.time}</p>
 
-                    <h2>Arrival:</h2>
-                    <p>{userData && userData.user.arrival.location}, {userData && userData.user.arrival.time}</p>
+                            <h2>Transport name, number:</h2>
+                            <p>{userData && `${userData.user.transport}`}</p>
 
-                    <h2>Transport name, number:</h2>
-                    <p>{userData && `${userData.user.transport}`}</p>
-
-                    <PresPad className={style.prespad} imageSrc="/images/qr.svg" alt="qr_code_smaple" head="" text="" />
-                </PresPad>
-            </motion.div>
-        </div>
-    )
+                            <PresPad className={style.prespad} imageSrc="/images/qr.svg" alt="qr_code_smaple" head="" text="" />
+                        </PresPad>
+                    </motion.div>
+                </div>
+            </>
+        )
+    }
 }
 
 export default Nav

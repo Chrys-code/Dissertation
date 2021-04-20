@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('./static/workbox/sw.js')
+        .register('/sw.js')
         .then(() => console.log('service worker registered.'))
         .catch(err => console.log(err));
     }
