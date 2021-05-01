@@ -1,15 +1,17 @@
 //////////////////////
 // PACKAGES
 //////////////////////
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
 const path = require('path')
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
 const session = require("express-session")
+const next = require('next')
+const dev = process.env.NODE_ENV !== 'production'
 const server = next({ dev })
 const handle = server.getRequestHandler()
-require("dotenv").config({ path: '../keys.env' });
+require("dotenv").config({ path: '../keys.env' })
 
 //////////////////////
 // MODULES
@@ -48,11 +50,11 @@ server.prepare().then(() => {
     app.use(bodyParser.json());
     app.use(cors());
     app.use(express.urlencoded({ extended: false }));
-
-    if (process.env.NODE_ENV === "production") {
-        app.use(express.static(path.join(__dirname, 'public')))
-    }
-
+    /*
+        if (process.env.NODE_ENV === "production") {
+            app.use(express.static(path.join(__dirname, 'public')))
+        }
+    */
     //////////////////////
     // ROUTES
     //////////////////////
@@ -81,6 +83,10 @@ server.prepare().then(() => {
     // User Events
     app.use("/api", formupdate);
     app.use("/api", linkupdate);
+
+    app.get('*', (req, res) => {
+        return handle(req, res)
+    })
 
     //////////////////////
     // RUN PORT 8080
