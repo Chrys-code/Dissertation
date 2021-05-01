@@ -17,6 +17,11 @@ const Links: FC<Props> = ({ userData }: Props) => {
   const [formState, setFormState] = useState({ link: '', head: '', text: '' })
   const [buttonLabel, setButtonLabel] = useState("+");
 
+  // Accessing without session
+  useEffect(() => {
+    if (!userData || !userData.user) router.push('/signin')
+  }, [userData])
+
   const isFormComplete = (form) => {
     let values = [];
     Object.entries(form).forEach(([key, value]) => {
@@ -95,7 +100,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
   }
 
   // Conditional rendering if session is not set
-  if (!userData && !userData.user) {
+  if (!userData || !userData.user) {
     return (<>
       <h1>Please log in <span onClick={handleClick}><u>here</u></span></h1>
     </>)

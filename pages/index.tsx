@@ -1,6 +1,5 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useEffect } from "react"
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
 import Link from "next/link"
 import { fetchCovidData } from "../lib/coviddata"
 import style from "../styles/index_style.module.scss"
@@ -20,6 +19,11 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
   // State
   const [response1, setResponse1] = useState([])
   const [response2, setResponse2] = useState([])
+
+  // Accessing without session
+  useEffect(() => {
+    if (!userData || !userData.user) router.push('/signin')
+  }, [userData])
 
   // Filter API data for comparison1
   const handleInput1 = (e) => {

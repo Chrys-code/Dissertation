@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 const session = require("express-session")
 const next = require('next')
 const dev = process.env.NODE_ENV !== 'production'
-const server = next({ dev })
+const server = next({ dev })  /*, dir: path.join(__dirname, '../')*/
 const handle = server.getRequestHandler()
 require("dotenv").config({ path: '../keys.env' })
 
@@ -38,9 +38,11 @@ mongoose.connect(process.env.DB_KEY, {
     useCreateIndex: true
 });
 
+/*
 mongoose.connection.on('open', () => {
     console.log('Connected to Database')
 });
+*/
 
 server.prepare().then(() => {
     //////////////////////
@@ -50,11 +52,7 @@ server.prepare().then(() => {
     app.use(bodyParser.json());
     app.use(cors());
     app.use(express.urlencoded({ extended: false }));
-    /*
-        if (process.env.NODE_ENV === "production") {
-            app.use(express.static(path.join(__dirname, 'public')))
-        }
-    */
+
     //////////////////////
     // ROUTES
     //////////////////////
@@ -64,7 +62,7 @@ server.prepare().then(() => {
 
     app.use(session({
         secret: 'something amazingly strong secret',
-        resave: false,
+        resave: true,
         saveUninitialized: true,
         cookie: {
             secure: false,

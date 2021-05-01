@@ -41,7 +41,7 @@ const Nav: FC<Props> = ({ userData }) => {
         } else {
             // If route is home page, trigger session termination and exit
             if (router.route == "/") {
-                const data = await fetch(`http://localhost:3000/api/signout`, {
+                const data = await fetch(process.env.NODE_ENV === 'production' ? 'https://c19travel.herokuapp.com/api/signout' : `http://localhost:3000/api/signout`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',

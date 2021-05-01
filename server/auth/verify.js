@@ -11,6 +11,7 @@ const session = require("express-session")
 //////////////////////
 router.post("/verify", (req, res) => {
     // If session is not set
+
     if (!session.sessionId || !session.userId) {
         return res.send({
             success: false,

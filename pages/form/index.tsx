@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useEffect } from "react"
 import { GetServerSideProps } from 'next';
 import style from "../../styles/form_style.module.scss"
 import Nav from "../components/navbar"
@@ -15,6 +15,11 @@ const Form: FC<Props> = ({ userData }) => {
     const router = useRouter()
     const [inputData, setInputData] = useState<object>({})
     const [buttonLabel, setButtonLabel] = useState<string>("Save")
+
+    // Accessing without session
+    useEffect(() => {
+        if (!userData || !userData.user) router.push('/signin')
+    }, [userData])
 
     // User Data update dynamically listening onChange
     const handleInput = (e) => {
