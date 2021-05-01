@@ -35,7 +35,7 @@ const Signup: FC<Props> = ({ }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // unfortunately axios had XHR and http problems here
-        const data = await fetch("http://localhost:3000/api/signup", {
+        const data = await fetch(process.env.NODE_ENV === 'production' ? 'https://c19travel.herokuapp.com/api/signup' : "http://localhost:3000/api/signup", {
             method: "POST",
             body: JSON.stringify(inputData),
             headers: {

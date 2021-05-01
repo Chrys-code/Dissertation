@@ -59,7 +59,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
   // Add new item
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const data = await fetch(process.env.NODE_ENV === "production" ? process.env.LINKS : 'http://localhost:3000/api/links', {
+    const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/links' : 'http://localhost:3000/api/links', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ export default Links
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   // Fetch session and user
-  const data = await fetch(process.env.NODE_ENV === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
+  const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/verify' : 'http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

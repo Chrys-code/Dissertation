@@ -24,7 +24,7 @@ const Form: FC<Props> = ({ userData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await fetch(process.env.NODE_ENV === "production" ? process.env.FORM : 'http://localhost:3000/api/form', {
+        const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/form' : 'http://localhost:3000/api/form', {
             method: "POST",
             body: JSON.stringify(inputData),
             headers: {
@@ -98,7 +98,7 @@ export default Form
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     // Verify session
-    const data = await fetch(process.env.NODE_ENV === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
+    const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/verify' : 'http://localhost:3000/api/verify', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
