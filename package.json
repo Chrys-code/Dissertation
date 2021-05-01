@@ -2,6 +2,8 @@
   "name": "travelapp",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
+  "author": "Krisztian Nagy",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",

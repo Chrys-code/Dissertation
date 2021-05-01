@@ -7,6 +7,8 @@ const cors = require('cors');
 const path = require('path')
 const bodyParser = require('body-parser');
 const session = require("express-session")
+const server = next({ dev })
+const handle = server.getRequestHandler()
 require("dotenv").config({ path: '../keys.env' });
 
 //////////////////////
@@ -38,50 +40,51 @@ mongoose.connection.on('open', () => {
     console.log('Connected to Database')
 });
 
+server.prepare().then(() => {
+    //////////////////////
+    // APP
+    //////////////////////
+    const app = express();
+    app.use(bodyParser.json());
+    app.use(cors());
+    app.use(express.urlencoded({ extended: false }));
 
-//////////////////////
-// APP
-//////////////////////
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, 'public')))
-}
-
-//////////////////////
-// ROUTES
-//////////////////////
-// Auth
-app.use("/api", signin);
-app.use("/api", signup);
-
-app.use(session({
-    secret: 'something amazingly strong secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        secure: false,
-        maxAge: 7200000
+    if (process.env.NODE_ENV === "production") {
+        app.use(express.static(path.join(__dirname, 'public')))
     }
-}))
-// Session Verification from Client side
-app.use("/api", verify);
 
-// Signout
-app.use("/api", signout);
+    //////////////////////
+    // ROUTES
+    //////////////////////
+    // Auth
+    app.use("/api", signin);
+    app.use("/api", signup);
 
-// App Events
-app.use("/api", profiledata);
-app.use("/api", linkdata);
-// User Events
-app.use("/api", formupdate);
-app.use("/api", linkupdate);
+    app.use(session({
+        secret: 'something amazingly strong secret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            secure: false,
+            maxAge: 7200000
+        }
+    }))
+    // Session Verification from Client side
+    app.use("/api", verify);
 
-//////////////////////
-// RUN PORT 8080
-//////////////////////
-const PORT = process.env.PORT || 8080;
-app.listen(PORT)
+    // Signout
+    app.use("/api", signout);
+
+    // App Events
+    app.use("/api", profiledata);
+    app.use("/api", linkdata);
+    // User Events
+    app.use("/api", formupdate);
+    app.use("/api", linkupdate);
+
+    //////////////////////
+    // RUN PORT 8080
+    //////////////////////
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT)
+})
