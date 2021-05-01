@@ -1,5 +1,4 @@
-import React, { FC, useState, useEffect } from "react"
-import Head from 'next/head'
+import React, { FC, useState } from "react"
 import { GetServerSideProps } from 'next';
 import style from "../../styles/form_style.module.scss"
 import Nav from "../components/navbar"
@@ -14,10 +13,7 @@ interface Props { userData: any }
 
 const Form: FC<Props> = ({ userData }) => {
     const router = useRouter()
-
-    // User data
     const [inputData, setInputData] = useState<object>({})
-    // Feedback
     const [buttonLabel, setButtonLabel] = useState<string>("Save")
 
     // User Data update dynamically listening onChange
@@ -26,10 +22,9 @@ const Form: FC<Props> = ({ userData }) => {
         setInputData({ ...inputData, [name]: value })
     }
 
-    // Handling form submit: request user registration
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await fetch(process.env.PROD === "production" ? process.env.FORM : 'http://localhost:3000/api/form', {
+        const data = await fetch(process.env.NODE_ENV === "production" ? process.env.FORM : 'http://localhost:3000/api/form', {
             method: "POST",
             body: JSON.stringify(inputData),
             headers: {
@@ -38,17 +33,15 @@ const Form: FC<Props> = ({ userData }) => {
             }
         })
         const response = await data.json()
-
         if (response) {
             setButtonLabel(`${response.message}`)
-
             setTimeout(() => {
                 setButtonLabel("Save")
             }, 2000)
         }
     }
 
-    // "Please login here" when try to access the app without session
+    // Accessing the app without session
     const handleClick = (e) => {
         router.push('/signin')
     }
@@ -104,15 +97,14 @@ export default Form
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-    // Fetch session and user
-    const data = await fetch(process.env.PROD === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
+    // Verify session
+    const data = await fetch(process.env.NODE_ENV === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         }
     })
-
     const res = await data.json();
     return { props: { userData: res || null } }
 }

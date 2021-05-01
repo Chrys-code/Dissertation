@@ -29,7 +29,7 @@ router.post("/signup", (req, res) => {
     if (!email) {
         return res.send({
             success: false,
-            message: "Email cennot be blank.",
+            message: "Email cannot be blank.",
         });
     }
 
@@ -50,7 +50,7 @@ router.post("/signup", (req, res) => {
                     success: false,
                     message: `Internal Error`,
                 });
-            } else if (users.length != 1) {
+            } else if (users.length != 0) {
                 return res.send({
                     success: false,
                     message: "Email is are already in use",
@@ -80,6 +80,8 @@ router.post("/signup", (req, res) => {
                             message: `Failed to create session, try sign in`,
                         });
                     }
+                    session.userId = user._id
+                    session.sessionId = doc._id
                     return res.status(200).send({
                         success: true,
                         token: doc._id

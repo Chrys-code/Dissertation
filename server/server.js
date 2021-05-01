@@ -4,6 +4,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path')
 const bodyParser = require('body-parser');
 const session = require("express-session")
 require("dotenv").config({ path: '../keys.env' });
@@ -42,29 +43,35 @@ mongoose.connection.on('open', () => {
 // APP
 //////////////////////
 const app = express();
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        secure: false,
-        maxAge: 60000
-    }
-}))
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
-
+/*
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("../client/build"));
+    app.use(express.static(path.join(__dirname, 'public')))
+}
+*/
 //////////////////////
 // ROUTES
 //////////////////////
 // Auth
 app.use("/api", signin);
+app.use("/api", signup);
 
+app.use(session({
+    secret: 'something amazingly strong secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: false,
+        maxAge: 7200000
+    }
+}))
 // Session Verification from Client side
 app.use("/api", verify);
 
-app.use("/api", signup);
+// Signout
 app.use("/api", signout);
 
 // App Events
@@ -73,12 +80,6 @@ app.use("/api", linkdata);
 // User Events
 app.use("/api", formupdate);
 app.use("/api", linkupdate);
-
-
-// heroku
-if (process.env.PROD === "production") {
-    app.use(express.static("cli/url/here"));
-}
 
 //////////////////////
 // RUN PORT 8080

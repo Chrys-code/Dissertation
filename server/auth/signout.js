@@ -12,7 +12,6 @@ const session = require("express-session")
 //////////////////////
 router.post("/signout", (req, res, next) => {
     const { body } = req;
-
     UserSession.findOneAndUpdate(
         {
             _id: session.sessionId,

@@ -46,7 +46,7 @@ router.post("/signin", (req, res) => {
             if (users.length != 1) {
                 return res.send({
                     success: false,
-                    message: `Invalid Username`,
+                    message: `Invalid Email`,
                 });
             }
 

@@ -142,7 +142,7 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const data = await fetch(process.env.PROD === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
+  const data = await fetch(process.env.NODE_ENV === "production" ? process.env.VERIFY : 'http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

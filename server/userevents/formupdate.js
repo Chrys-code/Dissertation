@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userschema");
-const UserSession = require('../models/usersession');
-
+const session = require("express-session")
 
 //////////////////////
 // Saving user data
@@ -10,7 +9,7 @@ const UserSession = require('../models/usersession');
 
 router.post("/form", (req, res) => {
     const {
-        userId, transport,
+        transport,
         departure, departure_year,
         departure_month, departure_day,
         arrival, arrival_year,
@@ -18,17 +17,21 @@ router.post("/form", (req, res) => {
         children
     } = req.body;
 
-    // sserId === token
-    // For some reason cannot pass the value with another key:value pair from client???!!
-    const sessionId = userId.split("=")[1];
-
-    const arrivalTime = `${arrival_year}.${arrival_month}.${arrival_day}`;
-    const departureTime = `${departure_year}.${departure_month}.${departure_day}`;
-
-    if (!sessionId) {
+    // If session is not set
+    if (!session.sessionId || !session.userId) {
         return res.send({
             success: false,
-            message: "Internal Error",
+            message: `Invalid session`,
+        });
+    }
+
+    const arrivalTime = `${arrival_year}.${arrival_month}.${arrival_day}`
+    const departureTime = `${departure_year}.${departure_month}.${departure_day}`
+
+    if (!transport) {
+        return res.send({
+            success: false,
+            message: "Transprot cannot be blank",
         });
     }
 
@@ -53,65 +56,36 @@ router.post("/form", (req, res) => {
         });
     }
 
-    if (!transport) {
-        return res.send({
-            success: false,
-            message: "Transprot cannot be blank",
-        });
-    }
-
-
-    UserSession.find({
-        _id: sessionId,
-        isValid: true,
-    }, (err, sessions) => {
-        if (err) {
-            return res.send({
-                success: false,
-                message: `Internal Error`,
-            });
-        }
-
-        const session = sessions[0];
-        if (sessions.length != 1) {
-            return res.send({
-                sucess: false,
-                message: `Internal Error`,
-            });
-        }
-
-        User.findOneAndUpdate({
-            _id: session.userId,
-        },
-            {
-                $set: {
-                    children: children,
-                    departure: {
-                        location: departure,
-                        time: departureTime
-                    },
-                    arrival: {
-                        location: arrival,
-                        time: arrivalTime
-                    },
-                    transport: transport,
-                    updated: Date.now()
+    User.findOneAndUpdate({
+        _id: session.userId,
+    },
+        {
+            $set: {
+                children: children,
+                departure: {
+                    location: departure,
+                    time: departureTime
                 },
+                arrival: {
+                    location: arrival,
+                    time: arrivalTime
+                },
+                transport: transport,
+                updated: Date.now()
             },
-            null, (err) => {
-                if (err) {
-                    return res.send({
-                        success: false,
-                        message: `Error`,
-                    });
-                }
-
+        },
+        null, (err) => {
+            if (err) {
                 return res.send({
-                    success: true,
-                    message: `Saved!`,
+                    success: false,
+                    message: `Error`,
                 });
-            })
-    })
+            }
+            return res.send({
+                success: true,
+                message: `Saved!`,
+            });
+        })
 });
 
 
