@@ -9,7 +9,7 @@
     "client": "next dev",
     "server": "cd server && nodemon server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "node server/server.js -p $PORT",
     "dev": "concurrently -n 'server,client' -c 'red,green' \"npm run server\" \"npm run client\""
   },
   "dependencies": {

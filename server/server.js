@@ -46,12 +46,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
-/*
+
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("../client/build"));
     app.use(express.static(path.join(__dirname, 'public')))
 }
-*/
+
 //////////////////////
 // ROUTES
 //////////////////////
