@@ -23,14 +23,14 @@ router.post("/verify", (req, res) => {
 
         const session = sessions[0]
         if (sessions.length != 1) {
-            res.send({
+            return res.send({
                 success: false,
                 message: 'Error: Internal server error'
             })
         }
 
         if (!session.userId) {
-            res.send({
+            return res.send({
                 success: false,
                 message: 'Error: Internal server error'
             })
