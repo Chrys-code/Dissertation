@@ -32,14 +32,14 @@ $bold: 700;
   font-size: $tablet_Header;
   font-weight: $bold;
   color: $color;
-  margin: 10px;
+  margin: 15px;
 }
 // Sub-Header
 @mixin tablet_h2($color) {
   font-size: $tablet_SubHeader;
   font-weight: $semiBold;
   color: $color;
-  margin: 5px;
+  margin: 10px;
 }
 
 // Text
@@ -47,7 +47,7 @@ $bold: 700;
   font-size: $tablet_Primary;
   font-weight: $weight;
   color: $color;
-  margin: 5px;
+  margin: 10px;
 }
 
 // Subtext
@@ -55,7 +55,7 @@ $bold: 700;
   font-size: $tablet_Secondary;
   font-weight: $weight;
   color: $color;
-  margin: 2px;
+  margin: 5px;
 }
 
 
@@ -68,14 +68,14 @@ $bold: 700;
   font-size: $mobile_Header;
   font-weight: $bold;
   color: $color;
-  margin: 10px;
+  margin: 15px;
 }
 // Sub-Header
 @mixin mobile_h2($color) {
   font-size: $mobile_SubHeader;
   font-weight: $semiBold;
   color: $color;
-  margin: 5px;
+  margin: 10px;
 }
 
 // Text
@@ -83,7 +83,7 @@ $bold: 700;
   font-size: $mobile_Primary;
   font-weight: $weight;
   color: $color;
-  margin: 5px;
+  margin: 10px;
 }
 
 // Subtext
@@ -91,5 +91,5 @@ $bold: 700;
   font-size: $mobile_Secondary;
   font-weight: $weight;
   color: $color;
-  margin: 2px;
+  margin: 5px;
 }
