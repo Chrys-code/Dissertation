@@ -29,7 +29,13 @@ router.post("/verify", (req, res) => {
             })
         }
 
-        // If session is set get user data
+        if (!session.userId) {
+            res.send({
+                success: false,
+                message: 'Error: Internal server error'
+            })
+        }
+
         User.find({
             _id: session.userId
         }, (err, users) => {
@@ -62,12 +68,6 @@ router.post("/verify", (req, res) => {
             });
         })
     });
-
-
-}
-
-)
-
-
+})
 
 module.exports = router;
