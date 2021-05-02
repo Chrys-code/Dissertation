@@ -1,11 +1,12 @@
-import React, { FC, useState, useEffect } from "react";
-import Link from "next/link";
-import Head from 'next/head';
+import React, { FC, useState, useEffect } from "react"
+import Link from "next/link"
+import Head from 'next/head'
 import { useRouter } from 'next/router'
-import style from "../../styles/signin_style.module.scss";
+import style from "../../styles/signin_style.module.scss"
 import Button from "../components/button"
 import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
+import Cookie from 'js-cookie'
 
 interface Props { }
 
@@ -52,7 +53,8 @@ const Signup: FC<Props> = ({ }) => {
             }, 2000)
         }
 
-        if (response && response.success == true) {
+        if (response && response.token) {
+            Cookie.set('SID', response.token)
             router.push('/')
         }
     }

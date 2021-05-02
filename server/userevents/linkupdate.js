@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userschema");
-const session = require("express-session")
+const UserSession = require('../models/usersession');
 
 //////////////////////
 // Saving user data
@@ -9,19 +9,15 @@ const session = require("express-session")
 
 router.post("/links", (req, res, next) => {
     const { body } = req;
-    const { link, head, text } = body;
-    if (!session.sessionId || !session.userId) {
+    const { link, head, text, sid } = body;
+
+    if (!sid) {
         return res.send({
             success: false,
-            message: `Invalid session`,
+            message: "Invalid session",
         });
     }
-    if (!session.sessionId) {
-        return res.send({
-            success: false,
-            message: "Error: Failed to identify session",
-        });
-    }
+
     if (!link) {
         return res.send({
             success: false,
@@ -40,38 +36,58 @@ router.post("/links", (req, res, next) => {
             message: "List item must have a description",
         });
     }
-
-    User.findOneAndUpdate(
-        {
-            _id: session.userId,
-        },
-        {
-            $push: {
-                links: {
-                    link: link,
-                    head: head,
-                    text: text,
-                }
-            },
-            $set: {
-                updated: Date.now()
-            },
-        },
-        null,
-        (err) => {
-            if (err) {
-                return res.send({
-                    success: false,
-                    message: `Error: Failed to update`,
-                });
-            }
-
+    UserSession.find({
+        _id: sid
+    }, (err, sessions) => {
+        if (err) {
             return res.send({
-                success: true,
-                message: "Saved!",
+                success: false,
+                message: `Error: Internal server error`,
             });
         }
-    );
+
+        const session = sessions[0]
+        if (sessions.length != 1) {
+            res.send({
+                success: false,
+                message: 'Error: Internal server error'
+            })
+        }
+
+        User.findOneAndUpdate(
+            {
+                _id: session.userId,
+            },
+            {
+                $push: {
+                    links: {
+                        link: link,
+                        head: head,
+                        text: text,
+                    }
+                },
+                $set: {
+                    updated: Date.now()
+                },
+            },
+            null,
+            (err) => {
+                if (err) {
+                    return res.send({
+                        success: false,
+                        message: `Error: Failed to update`,
+                    });
+                }
+
+                return res.send({
+                    success: true,
+                    message: "Saved!",
+                });
+            }
+        );
+    });
+
 });
+
 module.exports = router;
 

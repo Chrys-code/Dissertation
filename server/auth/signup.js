@@ -5,8 +5,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/userschema");
 const UserSession = require('../models/usersession');
-const session = require("express-session")
-
 
 //////////////////
 // SIGNUP
@@ -80,8 +78,8 @@ router.post("/signup", (req, res) => {
                             message: `Failed to create session, try sign in`,
                         });
                     }
-                    session.userId = user._id
-                    session.sessionId = doc._id
+                    //session.userId = user._id
+                    //session.sessionId = doc._id
                     return res.status(200).send({
                         success: true,
                         token: doc._id

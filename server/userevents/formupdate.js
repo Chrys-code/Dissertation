@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userschema");
-const session = require("express-session")
+const UserSession = require('../models/usersession')
 
 //////////////////////
 // Saving user data
@@ -14,14 +14,13 @@ router.post("/form", (req, res) => {
         departure_month, departure_day,
         arrival, arrival_year,
         arrival_month, arrival_day,
-        children
+        children, sid
     } = req.body;
 
-    // If session is not set
-    if (!session.sessionId || !session.userId) {
+    if (!sid) {
         return res.send({
             success: false,
-            message: `Invalid session`,
+            message: "Invalid session",
         });
     }
 
@@ -64,38 +63,56 @@ router.post("/form", (req, res) => {
         });
     }
 
-    User.findOneAndUpdate({
-        _id: session.userId,
-    },
-        {
-            $set: {
-                children: children,
-                departure: {
-                    location: departure,
-                    time: departureTime
-                },
-                arrival: {
-                    location: arrival,
-                    time: arrivalTime
-                },
-                transport: transport,
-                updated: Date.now()
-            },
-        },
-        null, (err) => {
-            if (err) {
-                return res.send({
-                    success: false,
-                    message: `Error`,
-                });
-            }
+    UserSession.find({
+        _id: sid
+    }, (err, sessions) => {
+        if (err) {
             return res.send({
-                success: true,
-                message: `Saved!`,
+                success: false,
+                message: `Error: Internal server error`,
             });
-        })
-});
+        }
 
+        const session = sessions[0]
+        if (sessions.length != 1) {
+            res.send({
+                success: false,
+                message: 'Error: Internal server error'
+            })
+        }
 
+        // If session is set get user data
+        User.findOneAndUpdate({
+            _id: session.userId,
+        },
+            {
+                $set: {
+                    children: children,
+                    departure: {
+                        location: departure,
+                        time: departureTime
+                    },
+                    arrival: {
+                        location: arrival,
+                        time: arrivalTime
+                    },
+                    transport: transport,
+                    updated: Date.now()
+                },
+            },
+            null, (err) => {
+                if (err) {
+                    return res.send({
+                        success: false,
+                        message: `Error`,
+                    });
+                }
+                return res.send({
+                    success: true,
+                    message: `Saved!`,
+                });
+            })
+    });
+})
 
 module.exports = router;

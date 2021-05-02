@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
 const bodyParser = require('body-parser')
-const session = require("express-session")
 const next = require('next')
 const dev = process.env.NODE_ENV !== 'production'
 const server = next({ dev })  /*, dir: path.join(__dirname, '../')*/
@@ -56,19 +55,21 @@ server.prepare().then(() => {
     //////////////////////
     // ROUTES
     //////////////////////
+    /*
+        app.use(session({
+            secret: 'something amazingly strong secret',
+            resave: true,
+            saveUninitialized: true,
+            cookie: {
+                secure: false,
+                maxAge: 7200000
+            }
+        }))
+    */
     // Auth
     app.use("/api", signin);
     app.use("/api", signup);
 
-    app.use(session({
-        secret: 'something amazingly strong secret',
-        resave: true,
-        saveUninitialized: true,
-        cookie: {
-            secure: false,
-            maxAge: 7200000
-        }
-    }))
     // Session Verification from Client side
     app.use("/api", verify);
 

@@ -4,17 +4,15 @@
 const express = require("express");
 const router = express.Router();
 const UserSession = require('../models/usersession');
-const session = require("express-session")
-
 
 //////////////////////
 // LOGOUT
 //////////////////////
 router.post("/signout", (req, res, next) => {
-    const { body } = req;
+    const { sid } = req.body;
     UserSession.findOneAndUpdate(
         {
-            _id: session.sessionId,
+            _id: sid,
             isValid: true,
         },
         {
@@ -31,10 +29,6 @@ router.post("/signout", (req, res, next) => {
                     message: `Error: Failed to terminate session, ${err}`,
                 });
             }
-
-            // delete session identifiers manually
-            session.sessionId = null
-            session.userId = null
 
             return res.send({
                 success: true,

@@ -6,6 +6,7 @@ import Button from "../components/button"
 import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
 import Head from 'next/head'
+import Cookie from 'js-cookie'
 
 interface Props { }
 
@@ -52,7 +53,8 @@ const Signin: FC<Props> = ({ }) => {
             }, 2000)
         }
 
-        if (response && response.success == true) {
+        if (response && response.token) {
+            Cookie.set("SID", response.token);
             router.push('/')
         }
     }

@@ -8,11 +8,11 @@ import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
 import { useRouter } from 'next/router'
 import selectableDate from "../../lib/selectableDates"
-import { stringify } from "node:querystring";
+import { parseCookies } from '../../lib/parseCookie'
 
-interface Props { userData: any }
+interface Props { userData: any, sid: string }
 
-const Form: FC<Props> = ({ userData }) => {
+const Form: FC<Props> = ({ userData, sid }) => {
     const router = useRouter()
     const [inputData, setInputData] = useState<object>({})
     const [buttonLabel, setButtonLabel] = useState<string>("Save")
@@ -77,9 +77,10 @@ const Form: FC<Props> = ({ userData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/form' : 'http://localhost:3000/api/form', {
             method: "POST",
-            body: JSON.stringify(inputData),
+            body: JSON.stringify({ ...inputData, sid }),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -107,7 +108,7 @@ const Form: FC<Props> = ({ userData }) => {
         return (
             <>
                 <div className={style.navbar}>
-                    <Nav userData={userData} />
+                    <Nav userData={userData} sid={sid} />
                 </div>
                 <div className={style.container}>
                     <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
@@ -149,14 +150,15 @@ export default Form
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-    // Verify session
+    const cookies = parseCookies(req);
     const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/verify' : 'http://localhost:3000/api/verify', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-        }
+        },
+        body: JSON.stringify({ sid: cookies.SID })
     })
     const res = await data.json();
-    return { props: { userData: res || null } }
+    return { props: { userData: res || null, sid: cookies.SID || null } }
 }

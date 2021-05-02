@@ -8,9 +8,10 @@ import { motion } from "framer-motion"
 
 interface Props {
     userData: any,
+    sid: string
 }
 
-const Nav: FC<Props> = ({ userData }) => {
+const Nav: FC<Props> = ({ userData, sid }) => {
     const router = useRouter()
     // Profile open/close state
     const [profileOpen, setProfileOpen] = useState(false);
@@ -46,7 +47,8 @@ const Nav: FC<Props> = ({ userData }) => {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({ sid: sid })
                 })
                 const response = await data.json()
                 if (response && response.success == true) {

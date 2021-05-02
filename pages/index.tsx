@@ -7,13 +7,15 @@ import Nav from "./components/navbar"
 import Dropdown from "./components/dropdown"
 import PresPad from "./components/prespad"
 import { useRouter } from 'next/router'
+import { parseCookies } from '../lib/parseCookie'
 
 interface Props {
   covidData: Array<any>,
   userData: any,
+  sid: string,
 }
 
-const Home: FC<Props> = ({ userData, covidData }: Props) => {
+const Home: FC<Props> = ({ userData, covidData, sid }: Props) => {
   const router = useRouter()
 
   // State
@@ -50,7 +52,7 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
     return (
       <>
         <div className={style.navbar}>
-          <Nav userData={userData} />
+          <Nav userData={userData} sid={sid} />
         </div>
         <div className={style.container}>
           <div className={style.diagram}>
@@ -146,15 +148,17 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const cookies = parseCookies(req);
   const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/verify' : 'http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
+    body: JSON.stringify({ sid: cookies.SID })
   })
   const res = await data.json();
   // Get covid data from API
   const covid = await fetchCovidData()
-  return { props: { userData: res || null, covidData: covid || null } }
+  return { props: { userData: res || null, covidData: covid || null, sid: cookies.SID || null } }
 }

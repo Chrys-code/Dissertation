@@ -8,11 +8,12 @@ import InputField from "../components/inputfield"
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { motion } from "framer-motion"
+import { parseCookies } from '../../lib/parseCookie'
 
 
-interface Props { userData: any }
+interface Props { userData: any, sid: string }
 
-const Links: FC<Props> = ({ userData }: Props) => {
+const Links: FC<Props> = ({ userData, sid }: Props) => {
   const router = useRouter()
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [formState, setFormState] = useState({ link: '', head: '', text: '' })
@@ -71,7 +72,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(formState)
+      body: JSON.stringify({ ...formState, sid })
     })
 
     const res = await data.json();
@@ -109,7 +110,7 @@ const Links: FC<Props> = ({ userData }: Props) => {
     return (
       <>
         <div className={style.navbar}>
-          <Nav userData={userData} />
+          <Nav userData={userData} sid={sid} />
         </div>
         <div className={style.container}>
           <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
@@ -142,14 +143,15 @@ export default Links
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  // Fetch session and user
+  const cookies = parseCookies(req);
   const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/verify' : 'http://localhost:3000/api/verify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-    }
+    },
+    body: JSON.stringify({ sid: cookies.SID })
   })
   const res = await data.json();
-  return { props: { userData: res || null } }
+  return { props: { userData: res || null, sid: cookies.SID || null } }
 }
