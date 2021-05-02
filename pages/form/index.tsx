@@ -8,6 +8,7 @@ import InputField from "../components/inputfield"
 import PresPad from "../components/prespad"
 import { useRouter } from 'next/router'
 import selectableDate from "../../lib/selectableDates"
+import { stringify } from "node:querystring";
 
 interface Props { userData: any }
 
@@ -36,9 +37,9 @@ const Form: FC<Props> = ({ userData }) => {
         const d = new Date();
         // if current year give only future months / days else all
         if (selectableDate.isCurrentYear(d, inputData)) {
-            setMonthOpt(monthOpt.filter(x => x >= (d.getMonth() + 1)))
+            setMonthOpt(monthOpt.filter(x => parseInt(x) >= (d.getMonth() + 1)))
             if (selectableDate.isCurrentYear(d, inputData) && selectableDate.isCurrentMonth(d, inputData)) {
-                setDayOpt(dayOpt.filter(x => x >= d.getDate()))
+                setDayOpt(dayOpt.filter(x => parseInt(x) >= (d.getDate())))
             } else {
                 setDayOpt(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])
             }
