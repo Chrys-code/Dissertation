@@ -5,6 +5,7 @@
 @import "./lib/media.scss";
 
 .container {
+    main {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -28,6 +29,8 @@
     .link {
         color: $ColorError
     }
+}
+
 }
 
 

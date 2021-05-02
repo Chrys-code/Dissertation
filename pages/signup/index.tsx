@@ -63,18 +63,20 @@ const Signup: FC<Props> = ({ }) => {
                 <title>{route}</title>
             </Head>
             <div className={style.container}>
-                <PresPad className={style.prespad} imageSrc="/images/Iconlogo.svg" alt="logo.svg" head="" text="" />
-                <p>All the details in one place</p>
-                <form onSubmit={handleSubmit}>
-                    <InputField classNames={style} labelFor="" labelContent="" name="firstname" placeholder="Firstname" type="text" prefixImgSrc="/images/users.svg" handleInput={handleInput} />
-                    <InputField classNames={style} labelFor="" labelContent="" name="lastname" placeholder="Lastname" type="text" prefixImgSrc="/images/users.svg" handleInput={handleInput} />
-                    <InputField classNames={style} labelFor="" labelContent="" name="email" placeholder="Email" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />
-                    <InputField classNames={style} labelFor="" labelContent="" name="password" placeholder="Password" type="password" prefixImgSrc="/images/lock_password.svg" handleInput={handleInput} />
-                    <Button className={style.btn} content={buttonLabel} />
-                </form>
-                <Link href="/signin" >
-                    <a><p className={style.link}>Sign In</p></a>
-                </Link>
+                <main>
+                    <PresPad className={style.prespad} imageSrc="/images/Iconlogo.svg" alt="logo.svg" head="" text="" />
+                    <p>All the details in one place</p>
+                    <form onSubmit={handleSubmit}>
+                        <InputField classNames={style} labelFor="" labelContent="" name="firstname" placeholder="Firstname" type="text" prefixImgSrc="/images/users.svg" handleInput={handleInput} />
+                        <InputField classNames={style} labelFor="" labelContent="" name="lastname" placeholder="Lastname" type="text" prefixImgSrc="/images/users.svg" handleInput={handleInput} />
+                        <InputField classNames={style} labelFor="" labelContent="" name="email" placeholder="Email" type="text" prefixImgSrc="/images/lock_mail.svg" handleInput={handleInput} />
+                        <InputField classNames={style} labelFor="" labelContent="" name="password" placeholder="Password" type="password" prefixImgSrc="/images/lock_password.svg" handleInput={handleInput} />
+                        <Button className={style.btn} content={buttonLabel} />
+                    </form>
+                    <Link href="/signin" >
+                        <a><p className={style.link}>Sign In</p></a>
+                    </Link>
+                </main>
             </div>
         </>
     )
