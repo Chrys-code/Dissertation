@@ -37,12 +37,6 @@ mongoose.connect(process.env.DB_KEY, {
     useCreateIndex: true
 });
 
-/*
-mongoose.connection.on('open', () => {
-    console.log('Connected to Database')
-});
-*/
-
 server.prepare().then(() => {
     //////////////////////
     // APP
@@ -55,17 +49,6 @@ server.prepare().then(() => {
     //////////////////////
     // ROUTES
     //////////////////////
-    /*
-        app.use(session({
-            secret: 'something amazingly strong secret',
-            resave: true,
-            saveUninitialized: true,
-            cookie: {
-                secure: false,
-                maxAge: 7200000
-            }
-        }))
-    */
     // Auth
     app.use("/api", signin);
     app.use("/api", signup);
