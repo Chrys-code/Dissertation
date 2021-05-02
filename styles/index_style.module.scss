@@ -65,6 +65,10 @@
     @include prespad(150px, 345px) {
         .prespad {
             margin: 10px auto 10px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center
         }
         h2 {
             @include mobile_h2($White)
@@ -94,7 +98,7 @@
     
         a {
             display: inline-block;
-            margin: 15px 15px 15px 15px;
+            margin: 5px 5px 5px 5px;
         } 
         @include prespad(108px, 250px){
             img {

@@ -12,12 +12,23 @@
 }
 .container {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     text-align: center;
     width: 100%;
-    padding: 102px 15px 68px 15px;  
-    @include link {
+    padding: 68px 15px 15px 15px;
+    
+    @include prespad(100px, 90%){
+        .prespad {
+            margin-top: 25px;
+            text-align: center;
+            h2 {color: $Blue;}
+        }
+    };
+
+    @include link($width: 90%) {
         h2 {
             margin: 5px 5px 0px 5px;
         }
@@ -26,12 +37,13 @@
         }
     };
     form {
+        width: 90%;
         .form_content_animation {
             padding-top: 15px;
             @include input_field;
         }   
+        @include button;    
     }
-    @include button;
 
 
 
@@ -40,7 +52,15 @@
     //////////////
     
     @include sm {
-        @include link($width: 80%) {
+        @include prespad(100px, 450px){
+            .prespad {
+                margin-top: 25px;
+                text-align: center;
+                h2 {color: $Blue;}
+            }
+        };
+    
+        @include link($width: 450px) {
                 margin: 10px auto 10px auto;
         };
         form {
@@ -48,8 +68,8 @@
                 width: 80%;
                 margin: 15px auto 0px auto;
             }   
+            @include button($width: 450px);    
         }
-        @include button($width: 80%);    
     }
 
     //////////////
@@ -57,7 +77,7 @@
     //////////////
     
     @include md {
-        @include link($width: 650px) {
+        @include link($width: 450px) {
                 margin: 10px auto 10px auto;
         };
         form {
@@ -67,8 +87,5 @@
                 padding-top: 15px;
             }   
         }
-        @include button($width: 650px);    
     }
-
-
 }

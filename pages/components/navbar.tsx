@@ -65,6 +65,7 @@ const Nav: FC<Props> = ({ userData }) => {
         return (
             <>
                 <Head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <title>{route}</title>
                 </Head>
                 <div className={style.container} >

@@ -6,7 +6,6 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     <meta charSet="utf-8" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <meta name="HandheldFriendly" content="true" />
                     <meta name="description" content="Covid-19 Travel App to get prepared before the move." />
                     <meta name="keywords" content="covid, virus, 19, covid-19, pandemic, form, travel, links, information" />

@@ -133,7 +133,7 @@ const Home: FC<Props> = ({ userData, covidData }: Props) => {
             <a><PresPad className={style.prespad} imageSrc="/images/locator.svg" alt="green_backgroun_img" head="Locator From" text="Fill a form that is required to cross country border" /></a>
           </Link>
           <Link href="/links" >
-            <a><PresPad className={style.prespad} imageSrc="/images/links.svg" alt="blue_backgroun_img" head="Informations" text="See a list of useful links, or collect yourself" /></a>
+            <a><PresPad className={style.prespad} imageSrc="/images/links.svg" alt="blue_backgroun_img" head="Informations" text="Find useful informations below or expand your list" /></a>
           </Link>
         </div>
       </>

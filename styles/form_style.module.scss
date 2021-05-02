@@ -20,7 +20,7 @@
     padding: 68px 15px 15px 15px;
     min-height: 100vh;
 
-    @include prespad(100px, 100%){
+    @include prespad(100px, 90%){
         .prespad {
             margin-top: 25px;
             text-align: center;
@@ -29,7 +29,7 @@
     };
 
     form {
-        width: 75%;
+        width: 90%;
         // Input fields
         @include input_field {
             margin-top: 50px;
@@ -60,7 +60,7 @@
     
     @include sm {
         justify-content: center;
-        @include prespad(100px, 100%){
+        @include prespad(100px, 450px){
             .prespad {
                 margin-bottom: 50px;
             }

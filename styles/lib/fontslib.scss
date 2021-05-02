@@ -1,16 +1,16 @@
 //////////////////////////
 // DESKTOP_FONT_SIZE /tablet
 //////////////////////////
-$tablet_Header: 28px;
-$tablet_SubHeader: 24px;
+$tablet_Header: 24px;
+$tablet_SubHeader: 20px;
 $tablet_Primary: 16px;
 $tablet_Secondary: 14px;
 
 //////////////////////////
 // MOBILE_FONT_SIZE
 //////////////////////////
-$mobile_Header: 22px;
-$mobile_SubHeader: 20px;
+$mobile_Header: 20px;
+$mobile_SubHeader: 18px;
 $mobile_Primary: 16px;
 $mobile_Secondary: 12px;
 
@@ -32,12 +32,14 @@ $bold: 700;
   font-size: $tablet_Header;
   font-weight: $bold;
   color: $color;
+  margin: 10px;
 }
 // Sub-Header
 @mixin tablet_h2($color) {
   font-size: $tablet_SubHeader;
   font-weight: $semiBold;
   color: $color;
+  margin: 5px;
 }
 
 // Text
@@ -45,6 +47,7 @@ $bold: 700;
   font-size: $tablet_Primary;
   font-weight: $weight;
   color: $color;
+  margin: 5px;
 }
 
 // Subtext
@@ -52,6 +55,7 @@ $bold: 700;
   font-size: $tablet_Secondary;
   font-weight: $weight;
   color: $color;
+  margin: 2px;
 }
 
 
@@ -64,12 +68,14 @@ $bold: 700;
   font-size: $mobile_Header;
   font-weight: $bold;
   color: $color;
+  margin: 10px;
 }
 // Sub-Header
 @mixin mobile_h2($color) {
   font-size: $mobile_SubHeader;
   font-weight: $semiBold;
   color: $color;
+  margin: 5px;
 }
 
 // Text
@@ -77,6 +83,7 @@ $bold: 700;
   font-size: $mobile_Primary;
   font-weight: $weight;
   color: $color;
+  margin: 5px;
 }
 
 // Subtext
@@ -84,4 +91,5 @@ $bold: 700;
   font-size: $mobile_Secondary;
   font-weight: $weight;
   color: $color;
+  margin: 2px;
 }
