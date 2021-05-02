@@ -25,8 +25,16 @@ router.post("/form", (req, res) => {
         });
     }
 
+    if (departure_month > arrival_month || departure_day > arrival_day) {
+        return res.send({
+            success: false,
+            message: "Can't arrive before travel"
+        })
+    }
+
     const arrivalTime = `${arrival_year}.${arrival_month}.${arrival_day}`
     const departureTime = `${departure_year}.${departure_month}.${departure_day}`
+
 
     if (!transport) {
         return res.send({

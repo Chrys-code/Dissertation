@@ -26,12 +26,14 @@
 
     .diagram {
         margin: auto;
-        @include prespad(300px, 345px) {
+        width: 100%;
+        @include prespad(300px, 95%) {
             .prespad {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 text-align: start;
+                margin: 15px auto 10px auto;
             }
             h2 {
                 @include mobile_h2($General)
@@ -62,13 +64,18 @@
         }
     }
 
-    @include prespad(150px, 345px) {
+    @include prespad(150px, 95%) {
         .prespad {
             margin: 10px auto 10px auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center
+            align-items: center;
+            img {
+                width: 100%;
+                height: 150px;
+                border-radius: 10px;
+            }
         }
         h2 {
             @include mobile_h2($White)
@@ -101,8 +108,11 @@
             margin: 5px 5px 5px 5px;
         } 
         @include prespad(108px, 250px){
-            img {
-                width: 100%;
+            .prespad {
+                img {
+                    width: 100%;
+                    height: 108px;
+                }    
             }
         };
     }
@@ -121,7 +131,13 @@
                 }
             }
         }
-            @include prespad(150px, 345px);
+            @include prespad(150px, 345px) {
+                .prespad {
+                    img {
+                        height: 100%;
+                    }
+                }
+            };
     }
 
 }
