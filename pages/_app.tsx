@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
         .catch(err => console.log(err));
     }
   }, [])
+
   return (
     <>
       <Component {...pageProps} />

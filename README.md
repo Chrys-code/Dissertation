@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# UniMeetingsApp
+
+This is an application that aims to help people who needs to travel during the pandemic. During the study a set of problems were defined and the application offers feature(s) to help to solve these problems.
+
+## Accounts to access the application for live testing on Heroku:
+
+The application is personal- use only. There are no interactions between the accounts, so feel free to register.
+Even though your password will be encrypted, I recommend to not to use real credentials!!! 
 
 ## Getting Started
 
-First, run the development server:
+To install locally:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Clone the repository
+- In the root folder:
+- Run "npm run install" - This should install both server and client-side tools as both included in the same root package.json
+- Open the server/server.js and copy the commented line  on line:11 into the next function. It should look like this: "const server = next({ dev, dir: path.join(__dirname, '../') })"
+- Replace mongoDB connection to your mongoDB connection
+- Run "npm run dev" - This should start a nodemon server concurrently with front-end in the same terminal
+- Register and use the app
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment on live system
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- The application built to be hosted on Heroku as it needs a server for server-side rendering. 
+- For deployment, remove copied code described the 4th step in the **Getting Started** section
+- Upload to GitHub
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+  On Heroku:
+  - Open a new project
+  - On deploy tab: 
+    - Attach GitHub Repository in which the application is uploaded
+    - Scroll down the page, click deploy
+    - Heroku automatically recognize heroku-postbuild (by now it is not required as " npm run build" is enough)
+    - Wait until Heroku install, build, purging and compile the application 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+  On other live host:
+   - Run "npm run build" in the root folder
 
-## Learn More
+## Built With
 
-To learn more about Next.js, take a look at the following resources:
+* [Next.js](https://nextjs.org/) - The web framework used
+* [TypeScript](https://webpack.js.org/) - JavaScript framework to help prevent bugs
+* [Next-pwa](https://www.npmjs.com/package/next-pwa) - To generate service-worker and caching
+* [Framer-motion](https://www.npmjs.com/package/framer-motion) - The animations made with
+* [Webpack](https://webpack.js.org/) - Dependency Management
+* [SCSS](https://sass-lang.com/) - Sassy Cascading Style Sheet
+* [Node/Express](https://sass-lang.com/) - Backed with
+* [MongoDB](https://www.npmjs.com/package/mongodb) - Database used
+* [Jest](https://jestjs.io/) - Testing library used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Authors
 
-## Deploy on Vercel
+* **Krisztian Nagy** - *End-to-End development* - [Chrys-code](https://github.com/Chrys-code)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgments
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project was created as a University Assessment.
+
+Initial problems:
+ - Database was not structured with scalability in mind
+ - Due to the server shutdown on Heroku, service-worker is not available after a server shutdown (it would be valid if the app is rebuilt on every server start...)
+ - Front-End input validation is not implemented yet to help users register with fake credentials

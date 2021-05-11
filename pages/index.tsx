@@ -144,7 +144,6 @@ const Home: FC<Props> = ({ userData, covidData, sid }: Props) => {
   }
 }
 
-
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {

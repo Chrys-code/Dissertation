@@ -141,7 +141,6 @@ const Links: FC<Props> = ({ userData, sid }: Props) => {
 }
 export default Links
 
-
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = parseCookies(req);
   const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/verify' : 'http://localhost:3000/api/verify', {
