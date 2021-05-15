@@ -84,22 +84,30 @@ const Nav: FC<Props> = ({ userData, sid }) => {
                     <motion.div className={style.profile_animation_container} initial={{ transform: "translateX(120%)" }} animate={{ transform: profileOpen ? "translateX(0%)" : "translateX(120%)" }} transition={{ type: "spring", duration: .5 }}>
                         <PresPad className={style.prespad} imageSrc="" alt="" head="" text="" >
                             <h1>Profile</h1>
-
-                            <h2>Name:</h2>
-                            <p>{`${userData.user.firstname} ${userData.user.lastname}`}</p>
-
-                            <h2>With children:</h2>
-                            <p>{userData.user.children ? "Yes" : "No"}</p>
-
-                            <h2>Departure:</h2>
-                            <p>{userData.user.departure.location}, {userData.user.departure.time}</p>
-
-                            <h2>Arrival:</h2>
-                            <p>{userData && userData.user.arrival.location}, {userData && userData.user.arrival.time}</p>
-
-                            <h2>Transport name, number:</h2>
-                            <p>{userData && `${userData.user.transport}`}</p>
-
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th><h2>Name:</h2></th>
+                                        <td><p>{`${userData.user.firstname} ${userData.user.lastname}`}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <th><h2>Children:</h2></th>
+                                        <td><p>{userData.user.children ? "Yes" : "No"}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <th><h2>Departure:</h2></th>
+                                        <td><p>{userData.user.departure.location}, {userData.user.departure.time}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <th><h2>Arrival:</h2></th>
+                                        <td><p>{userData && userData.user.arrival.location}, {userData && userData.user.arrival.time}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <th><h2>Transport name, number:</h2></th>
+                                        <td><p>{userData && `${userData.user.transport}`}</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <PresPad className={style.prespad} imageSrc="/images/qr.svg" alt="qr_code_smaple" head="" text="" />
                         </PresPad>
                     </motion.div>
@@ -110,3 +118,71 @@ const Nav: FC<Props> = ({ userData, sid }) => {
 }
 
 export default Nav
+
+/*
+<table>
+<tbody>
+  <tr>
+    <th>Results</th>
+    <th>{response1[0].country}</th>
+    <th>{response2[0].country}</th>
+  </tr>
+  <tr>
+    <td>
+      Active cases:
+  </td>
+    <td>
+      {response1[0].cases.active}
+    </td>
+    <td>
+      {response2[0].cases.active}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      New cases:
+  </td>
+    <td>
+      {response1[0].cases.new}
+    </td>
+    <td>
+      {response2[0].cases.new}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Active 1M pop:
+  </td>
+    <td>
+      {response1[0].cases["1M_pop"]}
+    </td>
+    <td>
+      {response2[0].cases["1M_pop"]}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Tests 1M pop:
+  </td>
+    <td>
+      {response1[0].tests["1M_pop"]}
+    </td>
+    <td>
+      {response2[0].tests["1M_pop"]}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Deaths 1M pop:
+  </td>
+    <td>
+      {response1[0].deaths["1M_pop"]}
+    </td>
+    <td>
+      {response2[0].deaths["1M_pop"]}
+    </td>
+  </tr>
+</tbody>
+</table>
+
+*/
