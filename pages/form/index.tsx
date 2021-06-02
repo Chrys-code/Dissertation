@@ -12,18 +12,22 @@ import { parseCookies } from '../../lib/parseCookie'
 
 interface Props { userData: any, sid: string }
 
+const years = ['2021', '2022', '2023']
+const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+const days = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+
 const Form: FC<Props> = ({ userData, sid }) => {
     const router = useRouter()
     const [inputData, setInputData] = useState<object>({})
     const [buttonLabel, setButtonLabel] = useState<string>("Save")
     // Departure
-    const [yearOpt, setYearOpt] = useState(['2021', '2022', '2023'])
-    const [monthOpt, setMonthOpt] = useState(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'])
-    const [dayOpt, setDayOpt] = useState(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])
+    const [yearOpt, setYearOpt] = useState<Array<string>>(years)
+    const [monthOpt, setMonthOpt] = useState<Array<string>>(months)
+    const [dayOpt, setDayOpt] = useState<Array<string>>(days)
     // Arrival
-    const [ayearOpt, setaYearOpt] = useState(['2021', '2022', '2023'])
-    const [amonthOpt, setaMonthOpt] = useState(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'])
-    const [adayOpt, setaDayOpt] = useState(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])
+    const [ayearOpt, setaYearOpt] = useState<Array<string>>(years)
+    const [amonthOpt, setaMonthOpt] = useState<Array<string>>(months)
+    const [adayOpt, setaDayOpt] = useState<Array<string>>(days)
 
     // Accessing without session
     useEffect(() => {
@@ -39,11 +43,11 @@ const Form: FC<Props> = ({ userData, sid }) => {
             if (selectableDate.isCurrentYear(d, inputData) && selectableDate.isCurrentMonth(d, inputData)) {
                 setDayOpt(dayOpt.filter(x => parseInt(x) >= (d.getDate())))
             } else {
-                setDayOpt(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])
+                setDayOpt(days)
             }
         } else {
-            setMonthOpt(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'])
-            setDayOpt(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])
+            setMonthOpt(months)
+            setDayOpt(days)
         }
     }, [inputData])
 
@@ -57,11 +61,11 @@ const Form: FC<Props> = ({ userData, sid }) => {
                 if (selectableDate.isDepartureYear(inputData) && selectableDate.isDepartureMonth(inputData)) {
                     setaDayOpt(dayOpt.filter(x => x >= departure.departureDay))
                 } else {
-                    setaDayOpt(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])
+                    setaDayOpt(days)
                 }
             } else {
-                setaMonthOpt(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'])
-                setaDayOpt(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'])
+                setaMonthOpt(months)
+                setaDayOpt(days)
             }
         }
     }, [inputData])
@@ -75,7 +79,6 @@ const Form: FC<Props> = ({ userData, sid }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const data = await fetch(process.env.NODE_ENV === "production" ? 'https://c19travel.herokuapp.com/api/form' : 'http://localhost:3000/api/form', {
             method: "POST",
             body: JSON.stringify({ ...inputData, sid }),

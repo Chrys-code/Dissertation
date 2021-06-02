@@ -22,11 +22,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "lib/coviddata.js",
     "pages/api/covid.tss",
     "pages/_document.tsx",
     "index.spec.js",
-    "jest.setup.ts"
+    "jest.setup.ts",
   ],
   "exclude": [
     "node_modules"

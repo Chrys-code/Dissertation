@@ -89,7 +89,7 @@
     // Media SM
     ///////////////////
 
-    @include sm {
+    @include md {
         display: block;
         .diagram {
             margin: 25px auto 25px auto;
@@ -121,7 +121,7 @@
     // Media MD
     ///////////////////
 
-    @include md {
+    @include lg {
         display: block;
         .diagram {
             margin: 25px auto 25px auto;

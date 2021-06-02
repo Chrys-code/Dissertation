@@ -58,7 +58,7 @@
     // MEDIA SM
     //////////////
     
-    @include sm {
+    @include md {
         justify-content: center;
         @include prespad(100px, 450px){
             .prespad {

@@ -51,7 +51,7 @@
     // MEDIA SM
     //////////////
     
-    @include sm {
+    @include md {
         @include prespad(100px, 450px){
             .prespad {
                 margin-top: 25px;
@@ -76,7 +76,7 @@
     // MEDIA MD
     //////////////
     
-    @include md {
+    @include lg {
         @include link($width: 450px) {
                 margin: 10px auto 10px auto;
         };

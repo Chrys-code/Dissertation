@@ -21,21 +21,21 @@ a {
 
 h1 {
   @include mobile_h1($General);
-  @include sm {
+  @include md {
     @include tablet_h1($General);
   }
 }
 
 h2 {
   @include mobile_h2($General);
-  @include sm {
+  @include md {
    @include tablet_h2($General);
   }
 }
 
 p {
   @include mobile_primary($General, $regular);
-  @include sm {
+  @include md {
     @include tablet_primary($General, $regular);
   }
 }

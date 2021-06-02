@@ -22,7 +22,7 @@
         // Sign In button
         @include button($shadowDark: $Green);
 
-        @include sm {
+        @include md {
             width: 300px;
         }
     }
